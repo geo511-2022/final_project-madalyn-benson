@@ -1,14 +1,18 @@
 ---
 title: "My Final Project Template"
-author: Your name here
-subtitle: Subtitle here if desired
+author: Madalyn Benson
+subtitle: Predictability of Harmful Algal Bloom Prevalance in NYS
 ---
 
 # Introduction
 
-[~ 200 words]
-
-Clearly stated background and questions / hypotheses / problems being addressed. Sets up the analysis in an interesting and compelling way.
+An algal bloom is the overgrowth of algae in water sources. Algal blooms occur when exposed to the correct environmental conditions (i.e. excess nutrients, warm temperatures, ample sunlight, and low-flow water conditions). A bloom can be short-lived (a couple of hours) or long-lived (a couple of weeks) depending on how long the algae persist in the environment. Harmful algal blooms (HABs) can be harmful to humans and the environment. When this occurs the algal species can produce toxins with serious health impacts to humans, degrade aquatic ecosystems, and also affect the economy near coastal areas. The dominant algae in New York State include but are not limited to:
+  Green algae (Chlorophyta)
+  Golden brown algae (Chrysophyta), which also includes a large group of diatoms
+  Blue-green algae (Cyanobacteria)
+  Several smaller groups including (euglenoids, cryptomonads, and dinoflagellates)
+  
+The presence of the above harmful algal blooms varies both spatially and temporally in NYS, which results in varying risk for people, animals, and the local ecology. HABs are most prevalent in the months June through October, however they can occur at any time of year. HABs reduce tourism, close beaches, and greatly diminish local economies.  Because of this unpredictability, harmful algal blooms are of national concern. Data suggests that certain environmental conditions can be used as a tool to better understand and predict HABs. This project aims to explore any trends between harmful algal blooms prevalence within New York State by relating HAB prevalence over time to environmental conditions and populations. 
 
 # Materials and methods
 

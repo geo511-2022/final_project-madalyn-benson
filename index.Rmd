@@ -32,6 +32,25 @@ Image 3 is a figure displaying the occurrence of HAB events over time. This is a
 https://www.researchgate.net/figure/Frequency-of-occurrence-of-harmful-algal-blooms-during-the-last-century_fig4_236142114 
 
 # Proposed data sources
+1. Water quality data
+https://www.dec.ny.gov/chemical/31290.html
+To get water quality data for NYS, I plan on using the NYS Section 303(d) list of impaired/TMDL waters. Every two years, the Federal Clean Water Act and supporting federal regulations require states to submit a list of impaired waters that require the development of a Total Maximum Daily Load (TMDL). I will be using the 2020-2022 Clean Water Act (CWA) data set.  
+
+2. Spatial polygon data of NYS Counties
+http://gis.ny.gov/gisdata/metadata/nysgis.Counties_Shoreline.pdf 
+To get polygon data for NYS, I plan on using the NYS Civil Boundaries County Shoreline data from NYS GIS Clearinghouse. This dataset has accurate polygon edges for the edge of NYS counties. This is essential because these polygons will be used to extract data from the NLCD dataset, which has accurate data on the shorelines of state and county polygons. 
+3. Spatial polygon data of algal blooms
+https://www.dec.ny.gov/chemical/83332.html
+In order to track the HABs in NYS, I will be using the DEC 2012-2019 HABs archive summary to summarize all water bodies with harmful algal blooms documented. This will show algal bloom trends in NYS over time. 
+
+4. Spatial data showing NYS temperatures over time
+https://www.nyclimatescience.org/highlights/data_products 
+I will be using the interactive map of annual maximum temperatures in New York State from the New York Climate Change Science Clearinghouse (NYCCSC) to select data from New York State stations and observe temperature trends over time. I could also use NOAA temperatures at varying weather stations across NYS.
+
+5. Annual Population Estimates for New York State and Counties: Beginning 1970
+https://data.ny.gov/Government-Finance/Annual-Population-Estimates-for-New-York-State-and/krt9-ym2k/data
+I will be using this data to correlate a relationship between population density and HAB prevalnce. 
+
 # Proposed methods
 # Expected results
 

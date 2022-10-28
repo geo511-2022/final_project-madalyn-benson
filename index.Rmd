@@ -12,35 +12,28 @@ The presence of the above harmful algal blooms varies both spatially and tempora
 
 # Materials and methods
 
-Example 1
+## Example 1
 
-```{r}
-knitr::include_graphics("https://github.com/geo511-2022/final_project-madalyn-benson/blob/master/Example%201%20Project.jpg")
-```
+![Water Quality Assessment of New York State](https://www.dec.ny.gov/images/water_images/305basmtmap10.jpg)
 
-Example 2 Example 3
+Image 1 is the extracted raster data of the New York State water quality report from the New York State Department of Environmental Conservation (DEC).  I selected this image as an example because I will be needing a raster data image of New York for my project. This is a useful resource because it shows the water bodies in NYS. In my final project I will be showing where and when harmful algal blooms affect the water bodies of New York. 
+https://www.dec.ny.gov/chemical/66532.html 
 
-Narrative: Clear narrative description of the data sources and methods. Includes data from at least two sources that were integrated / merged in R.
+## Example 2 
+![Climate Data Grapher](https://www.nyclimatescience.org/static/media/datagrapher.14b4fecf.png)
 
-Code: The code associated with the project is well organized and easy to follow. Demonstrates mastery of R graphics and functions.
+Image 2 is an interactive map of annual maximum temperatures in New York State from the New York Climate Change Science Clearinghouse (NYCCSC). This is a valuable data source because the user can select data from New York State stations from gridded observations, spatially aggregated by New York counties and river basins, or by states neighboring New York. Different time periods can be observed to see temperature changes over time. 
+https://www.nyclimatescience.org/highlights/data_products 
 
-Data: The underlying data are publicly accessible via the web and downloaded/accessed within the Rmd script. If you want to use your own data, you must make it available on a website (e.g. Figshare) so that others are able to re-run your code.
+## Example 3
+![Freqeuncy of HAB Events](https://www.researchgate.net/profile/Kb-Padmakumar/publication/236142114/figure/fig4/AS:328425987428355@1455314265478/Frequency-of-occurrence-of-harmful-algal-blooms-during-the-last-century.png)
 
-You can do bullets like this:
+Image 3 is a figure displaying the occurrence of HAB events over time. This is a useful graphic because it is showing a sharp increase in algal blooms over 100 years. I would like to create a chart similar to this inorder to provide reasoning for an increase in algal blooms across NYS. I would do this by comparing other correlating data trends to support an increase in algal blooms. 
+https://www.researchgate.net/figure/Frequency-of-occurrence-of-harmful-algal-blooms-during-the-last-century_fig4_236142114 
 
--   The first most important thing
--   The second most important thing
--   The third most important thing
-
-You can do numbers like this:
-
-1.  The first most important thing
-2.  The second most important thing
-3.  The third most important thing
-
-See <http://rmarkdown.rstudio.com/> for all the amazing things you can do.
-
-Here's my first code chunk.
+# Proposed data sources
+# Proposed methods
+# Expected results
 
 ```{r}
 1+2

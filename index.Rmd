@@ -39,6 +39,7 @@ To get water quality data for NYS, I plan on using the NYS Section 303(d) list o
 2. Spatial polygon data of NYS Counties
 http://gis.ny.gov/gisdata/metadata/nysgis.Counties_Shoreline.pdf 
 To get polygon data for NYS, I plan on using the NYS Civil Boundaries County Shoreline data from NYS GIS Clearinghouse. This dataset has accurate polygon edges for the edge of NYS counties. This is essential because these polygons will be used to extract data from the NLCD dataset, which has accurate data on the shorelines of state and county polygons. 
+
 3. Spatial polygon data of algal blooms
 https://www.dec.ny.gov/chemical/83332.html
 In order to track the HABs in NYS, I will be using the DEC 2012-2019 HABs archive summary to summarize all water bodies with harmful algal blooms documented. This will show algal bloom trends in NYS over time. 
@@ -49,43 +50,147 @@ I will be using the interactive map of annual maximum temperatures in New York S
 
 5. Annual Population Estimates for New York State and Counties: Beginning 1970
 https://data.ny.gov/Government-Finance/Annual-Population-Estimates-for-New-York-State-and/krt9-ym2k/data
-I will be using this data to correlate a relationship between population density and HAB prevalnce. 
+I will be using this data to correlate a relationship between population density and HAB prevalence. 
 
 # Proposed methods
-# Expected results
 
-```{r}
-1+2
-```
+I will use the raster or read_sf package to download spatial polygon data for NYS counties. I will use the merge function to join all data and the tmap package to create the choropleth maps. To create an interactive map to display the data listed above, I will use the leaflet package. 
+
+1. creating a choropleth map for:
+average populations at country level across NYS
+
+2. creating a time-series graph of temperature trends over time for NYS counties 
+
+3. creating a map of NYS impaired water bodies
+
+4. creating interactive maps that display the following when a country is clicked on:
+population
+HAB occurrences 
+
+# Expected results
+Overall, I believe this project will be a successful attempt at monitoring the predictability of harmful algal bloom prevalence in NYS. Based on my expectations of this outline, relevant data will be projected in an effective way to show statistically relevalant correlations. 
+
 
 Load any required packages in a code chunk (you may need to install some packages):
 
 ```{r, message=F, warning=F}
-library(tidyverse)
-library(leaflet)
-library(kableExtra)
-knitr::opts_chunk$set(cache=TRUE)  # cache the results for quick compiling
+library(tmap)
+library(sf)
+#get county shapes 
+
+download.file("http://gis.ny.gov/gisdata/fileserver/?DSID=927&file=NYS_Civil_Boundaries.shp.zip",
+             destfile = "data/NYS_Civil_Boundaries.shp.zip", mode="wb")
+unzip("data/NYS_Civil_Boundaries.shp.zip", exdir = "./data/nyshp")
+
+#state shape
+shapeny <- st_read(dsn = "data/NYS_Civil_Boundaries.shp.zip", layer = "State_Shoreline")
+shapeny
+
+#counties 
+nycounties <- st_read(dsn = "data/NYS_Civil_Boundaries.shp.zip", layer = "Counties_Shoreline")
+work <- tm_shape(nycounties) +
+  tm_fill(col = "#f2f2f2") + 
+  tm_borders() +
+  tm_fill(col = "peja_18_hybrid_cat",
+          style = "cat",
+          title = "Legend: PEJA Identified by",
+          alpha = 1,
+          palette = c("#8073ac", "#ffe75e",  '#de7119', "#14b1ab")) +
+  tm_layout("NYS Counties",
+            legend.position = c("left","top"),
+            bg.color = "white",
+            title.size = 2,
+            inner.margin = .08,
+            legend.text.size = 1.4,
+            legend.title.size = 2)
+work
 ```
 
 ## Download and clean all required data
 
 ```{r}
-n=20
-data=data.frame(x=runif(n,-180,180),
-                y=runif(n,-60,60),
-                size = runif(n, 5, 20),
-                category = factor(
-                  sample(letters[1:5], n, replace = TRUE)
-                  ),
-                value = rnorm(n))
+library(choroplethr)
+library(choroplethrMaps)
+#default parameters
+data(df_pop_county)
+county_choropleth(df_pop_county, title = "US 2012 County Population Estimates", legend = "Population")
+#zoom into new york state with additional reference map
+county_choropleth(df_pop_county,
+                  title = "New York County Population Estimates, 2012",
+                  legend = "Population",
+                  state_zoom = "new york")
 ```
 
-```{r, results='asis'}
-data %>% 
-  slice(1:10) %>% #show only 1:n rows
-  kable(digits=2,align="c")%>% #make table and round to two digits
-  kable_styling(bootstrap_options = 
-                  c("striped", "hover", "condensed", "responsive")) #apply other formatting
+```{r}
+library(tidyverse)
+library(dplyr)
+library(p8105.datasets)
+library(patchwork)
+library(ggridges)
+
+knitr::opts_chunk$set(
+  fig.width = 6,
+  fig.asp = .6,
+  out.width = "90%"
+)
+
+theme_set(theme_minimal() + theme(legend.position = "bottom"))
+
+options(
+  ggplot2.continuous.colour = "viridis",
+  ggplot2.continuous.fill = "viridis"
+)
+
+scale_colour_discrete = scale_colour_viridis_d
+scale_fill_discrete = scale_fill_viridis_d
+
+data(ny_noaa)
+head(ny_noaa, 10)
+
+ny_noaa_structure = print(str(ny_noaa))
+
+ny_noaa_tidy = 
+  
+  ny_noaa %>%
+  
+  janitor::clean_names() %>%
+  
+  separate(date, into = c("Year", "Month", "Day")) %>%
+  
+  mutate(tmax = as.numeric(tmax), tmin = as.numeric(tmin), Year = as.numeric(Year), Month = as.numeric(Month), Day = as.numeric(Day), snow = as.numeric(snow)) %>%
+  
+   mutate(Month = month.name[Month]) %>%
+  
+  mutate(tmax = tmax/10, 
+         tmin = tmin/10, 
+         prcp = prcp/10)
+
+ny_noaa_summary =
+  
+  ny_noaa_tidy %>%
+  
+  filter(Month %in% c("January", "July")) %>%
+  
+  group_by(id, Year, Month) %>%
+  
+  summarize(mean_tmax = mean(tmax), na.rm = TRUE)
+
+ggplot(ny_noaa_summary, aes(x = Year, y = mean_tmax, group = Year, color = Month)) +
+  
+    geom_boxplot() + 
+  
+    facet_grid(. ~ Month) +
+  
+    scale_color_manual(values = c("January" = "blue", "July" = "red")) + 
+  
+    theme(legend.position = "none") + 
+  
+  labs(
+    
+    title = "Average maximum temperature for New York Weather Stations",
+    
+    y = "Average Maximum Temperature (C)")
+
 ```
 
 Add any additional processing steps here.
@@ -99,17 +204,11 @@ Tables and figures (maps and other graphics) are carefully planned to convey the
 Show tables, plots, etc. and describe them.
 
 ```{r, fig.width=6, fig.height=3, fig.cap="Map of completely random data"}
-m <- leaflet(data) %>% 
-  addTiles() %>% 
-  addCircleMarkers(~x, ~y, radius = ~size,color = ~as.factor(category)) %>% 
-  addPopups(~x[2], ~y[2], "Random popup")
-m  # a map with the default OSM tile layer
+
 ```
 
 ```{r}
-data %>% 
-  ggplot(aes(x=x,y=y,col=category))+
-  geom_point()
+
 ```
 
 # Conclusions

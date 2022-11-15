@@ -81,7 +81,6 @@ library(choroplethr)
 library(choroplethrMaps)
 #default parameters
 data(df_pop_county)
-county_choropleth(df_pop_county, title = "US 2012 County Population Estimates", legend = "Population")
 #zoom into new york state with additional reference map
 county_choropleth(df_pop_county,
                   title = "New York County Population Estimates, 2012",

@@ -73,38 +73,6 @@ Overall, I believe this project will be a successful attempt at monitoring the p
 
 Load any required packages in a code chunk (you may need to install some packages):
 
-```{r, message=F, warning=F}
-library(tmap)
-library(sf)
-#get county shapes 
-
-download.file("http://gis.ny.gov/gisdata/fileserver/?DSID=927&file=NYS_Civil_Boundaries.shp.zip",
-             destfile = "data/NYS_Civil_Boundaries.shp.zip", mode="wb")
-unzip("data/NYS_Civil_Boundaries.shp.zip", exdir = "./data/nyshp")
-
-#state shape
-shapeny <- st_read(dsn = "data/NYS_Civil_Boundaries.shp.zip", layer = "State_Shoreline")
-shapeny
-
-#counties 
-nycounties <- st_read(dsn = "data/NYS_Civil_Boundaries.shp.zip", layer = "Counties_Shoreline")
-work <- tm_shape(nycounties) +
-  tm_fill(col = "#f2f2f2") + 
-  tm_borders() +
-  tm_fill(col = "peja_18_hybrid_cat",
-          style = "cat",
-          title = "Legend: PEJA Identified by",
-          alpha = 1,
-          palette = c("#8073ac", "#ffe75e",  '#de7119', "#14b1ab")) +
-  tm_layout("NYS Counties",
-            legend.position = c("left","top"),
-            bg.color = "white",
-            title.size = 2,
-            inner.margin = .08,
-            legend.text.size = 1.4,
-            legend.title.size = 2)
-work
-```
 
 ## Download and clean all required data
 

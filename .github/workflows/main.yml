@@ -2,7 +2,7 @@ name: Render RMarkdown Website
 'on': push
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     container: rocker/geospatial:latest
     steps:
       - name: Checkout Repository
@@ -11,7 +11,7 @@ jobs:
         run: |-
           Rscript -e "install.packages('remotes', repos = 'https://demo.rstudiopm.com/all/__linux__/bionic/latest')"
           Rscript -e "remotes::install_deps(dependencies = TRUE, repos = 'https://demo.rstudiopm.com/all/__linux__/bionic/latest')"
-          Rscript -e "install.packages(c('testthat','RCurl','questionr','choroplethr'))"
+          Rscript -e "install.packages(c('testthat','RCurl','questionr'))"
           Rscript -e "questionr::qscan(list.files(pattern='*.R',recursive=T), load = TRUE, detail = FALSE)"
       - name: Render Site
         env:

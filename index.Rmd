@@ -79,6 +79,7 @@ Load any required packages in a code chunk (you may need to install some package
 ```{r}
 library(choroplethr)
 library(choroplethrMaps)
+library(janitor)
 #default parameters
 data(df_pop_county)
 #zoom into new york state with additional reference map

@@ -221,7 +221,7 @@ library(spData)
 data(world)
 data(us_states)
 
-noaa_df = readr::read_csv("final_project_madalyn-benson/data/Harmful_Algal_Bloom_Statewide_Occurrence_Summary__2012-2018.csv")
+noaa_df = readr::read_csv("data/Harmful_Algal_Bloom_Statewide_Occurrence_Summary__2012-2018.csv")
 
 ```
 # Results

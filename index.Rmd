@@ -212,8 +212,18 @@ ggplot(ny_noaa_summary, aes(x = Year, y = mean_tmax, group = Year, color = Month
 
 ```
 
-Add any additional processing steps here.
+```{r}
+library(sf)
+library(tidyverse)
+library(ggmap)
+library(rnoaa)
+library(spData)
+data(world)
+data(us_states)
 
+noaa_df = readr::read_csv("final_project_madalyn-benson/data/Harmful_Algal_Bloom_Statewide_Occurrence_Summary__2012-2018.csv")
+
+```
 # Results
 
 [\~200 words]

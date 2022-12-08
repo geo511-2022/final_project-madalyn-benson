@@ -213,17 +213,26 @@ ggplot(ny_noaa_summary, aes(x = Year, y = mean_tmax, group = Year, color = Month
 ```
 
 ```{r}
-library(sf)
+library(shiny)
+library(shinythemes)
+library(ggplot2)
+library(maps)
+library(leaflet)
 library(tidyverse)
-library(ggmap)
-library(rnoaa)
-library(spData)
-data(world)
-data(us_states)
+library(RColorBrewer)
+library(dplyr)
+library(tmap)
 
 noaa_df = readr::read_csv("data/Harmful_Algal_Bloom_Statewide_Occurrence_Summary__2012-2018.csv")
 
+
+m <- leaflet(noaa_df) %>%
+  addTiles() %>%  # Add default OpenStreetMap map tiles
+  addMarkers() %>% 
+  addCircles()
+m  # Print the map
 ```
+
 # Results
 
 [\~200 words]

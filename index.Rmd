@@ -226,9 +226,14 @@ library(tmap)
 noaa_df = readr::read_csv("data/Harmful_Algal_Bloom_Statewide_Occurrence_Summary__2012-2018.csv")
  
 
-m <- leaflet(noaa_df) %>%
-  addTiles() %>%  # Add default OpenStreetMap map tiles
-  addCircles()
+m <- leaflet(noaa_df, options = leafletOptions(minZoom = 6, dragging = TRUE)) %>%
+  setView(lat = 43, lng = -75, zoom = 6) %>%
+  setMaxBounds(lng1 = -70, 
+               lat1 = 40, 
+               lng2 = -80, 
+               lat2 = 45) %>%
+  addTiles() %>%
+  addCircles(popup= noaa_df$`County`) 
 m  # Print the map
 ```
 

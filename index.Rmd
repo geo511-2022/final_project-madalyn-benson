@@ -224,11 +224,10 @@ library(dplyr)
 library(tmap)
 
 noaa_df = readr::read_csv("data/Harmful_Algal_Bloom_Statewide_Occurrence_Summary__2012-2018.csv")
-
+ 
 
 m <- leaflet(noaa_df) %>%
   addTiles() %>%  # Add default OpenStreetMap map tiles
-  addMarkers() %>% 
   addCircles()
 m  # Print the map
 ```

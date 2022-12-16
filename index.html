@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Madalyn Benson" />
+
+
+<title>My Final Project Template</title>
+
+<script src="site_libs/header-attrs-2.18/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+<link href="site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="site_libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="site_libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="site_libs/leaflet-binding-2.1.1/leaflet.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Spatial Data Science Final Project</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">My Final Project Template</h1>
+<h3 class="subtitle">Predictability of Harmful Algal Bloom Prevalance in
+NYS</h3>
+<h4 class="author">Madalyn Benson</h4>
+
+</div>
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>An algal bloom is the overgrowth of algae in water sources. Algal
+blooms occur when exposed to the correct environmental conditions
+(i.e. excess nutrients, warm temperatures, ample sunlight, and low-flow
+water conditions). A bloom can be short-lived (a couple of hours) or
+long-lived (a couple of weeks) depending on how long the algae persist
+in the environment. Harmful algal blooms (HABs) can be harmful to humans
+and the environment. When this occurs the algal species can produce
+toxins with serious health impacts to humans, degrade aquatic
+ecosystems, and also affect the economy near coastal areas. The dominant
+algae in New York State include but are not limited to: Green algae
+(Chlorophyta) Golden brown algae (Chrysophyta), which also includes a
+large group of diatoms Blue-green algae (Cyanobacteria) Several smaller
+groups including (euglenoids, cryptomonads, and dinoflagellates)</p>
+<p>The presence of the above harmful algal blooms varies both spatially
+and temporally in NYS, which results in varying risk for people,
+animals, and the local ecology. HABs are most prevalent in the months
+June through October, however they can occur at any time of year. HABs
+reduce tourism, close beaches, and greatly diminish local economies.
+Because of this unpredictability, harmful algal blooms are of national
+concern. Data suggests that certain environmental conditions can be used
+as a tool to better understand and predict HABs. This project aims to
+explore any trends between harmful algal blooms prevalence within New
+York State by relating HAB prevalence over time to environmental
+conditions and populations.</p>
+</div>
+<div id="materials-and-methods" class="section level1">
+<h1>Materials and methods</h1>
+<div id="example-1" class="section level2">
+<h2>Example 1</h2>
+<div class="figure">
+<img src="https://www.dec.ny.gov/images/water_images/305basmtmap10.jpg"
+alt="" />
+<p class="caption">Water Quality Assessment of New York State</p>
+</div>
+<p>Image 1 is the extracted raster data of the New York State water
+quality report from the New York State Department of Environmental
+Conservation (DEC). I selected this image as an example because I will
+be needing a raster data image of New York for my project. This is a
+useful resource because it shows the water bodies in NYS. In my final
+project I will be showing where and when harmful algal blooms affect the
+water bodies of New York. <a
+href="https://www.dec.ny.gov/chemical/66532.html"
+class="uri">https://www.dec.ny.gov/chemical/66532.html</a></p>
+</div>
+<div id="example-2" class="section level2">
+<h2>Example 2</h2>
+<div class="figure">
+<img
+src="https://www.nyclimatescience.org/static/media/datagrapher.14b4fecf.png"
+alt="" />
+<p class="caption">Climate Data Grapher</p>
+</div>
+<p>Image 2 is an interactive map of annual maximum temperatures in New
+York State from the New York Climate Change Science Clearinghouse
+(NYCCSC). This is a valuable data source because the user can select
+data from New York State stations from gridded observations, spatially
+aggregated by New York counties and river basins, or by states
+neighboring New York. Different time periods can be observed to see
+temperature changes over time. <a
+href="https://www.nyclimatescience.org/highlights/data_products"
+class="uri">https://www.nyclimatescience.org/highlights/data_products</a></p>
+</div>
+<div id="example-3" class="section level2">
+<h2>Example 3</h2>
+<div class="figure">
+<img
+src="https://www.researchgate.net/profile/Kb-Padmakumar/publication/236142114/figure/fig4/AS:328425987428355@1455314265478/Frequency-of-occurrence-of-harmful-algal-blooms-during-the-last-century.png"
+alt="" />
+<p class="caption">Freqeuncy of HAB Events</p>
+</div>
+<p>Image 3 is a figure displaying the occurrence of HAB events over
+time. This is a useful graphic because it is showing a sharp increase in
+algal blooms over 100 years. I would like to create a chart similar to
+this inorder to provide reasoning for an increase in algal blooms across
+NYS. I would do this by comparing other correlating data trends to
+support an increase in algal blooms. <a
+href="https://www.researchgate.net/figure/Frequency-of-occurrence-of-harmful-algal-blooms-during-the-last-century_fig4_236142114"
+class="uri">https://www.researchgate.net/figure/Frequency-of-occurrence-of-harmful-algal-blooms-during-the-last-century_fig4_236142114</a></p>
+</div>
+</div>
+<div id="proposed-data-sources" class="section level1">
+<h1>Proposed data sources</h1>
+<ol style="list-style-type: decimal">
+<li><p>Water quality data <a
+href="https://www.dec.ny.gov/chemical/31290.html"
+class="uri">https://www.dec.ny.gov/chemical/31290.html</a> To get water
+quality data for NYS, I plan on using the NYS Section 303(d) list of
+impaired/TMDL waters. Every two years, the Federal Clean Water Act and
+supporting federal regulations require states to submit a list of
+impaired waters that require the development of a Total Maximum Daily
+Load (TMDL). I will be using the 2020-2022 Clean Water Act (CWA) data
+set.</p></li>
+<li><p>Spatial polygon data of NYS Counties <a
+href="http://gis.ny.gov/gisdata/metadata/nysgis.Counties_Shoreline.pdf"
+class="uri">http://gis.ny.gov/gisdata/metadata/nysgis.Counties_Shoreline.pdf</a>
+To get polygon data for NYS, I plan on using the NYS Civil Boundaries
+County Shoreline data from NYS GIS Clearinghouse. This dataset has
+accurate polygon edges for the edge of NYS counties. This is essential
+because these polygons will be used to extract data from the NLCD
+dataset, which has accurate data on the shorelines of state and county
+polygons.</p></li>
+<li><p>Spatial polygon data of algal blooms <a
+href="https://www.dec.ny.gov/chemical/83332.html"
+class="uri">https://www.dec.ny.gov/chemical/83332.html</a> In order to
+track the HABs in NYS, I will be using the DEC 2012-2019 HABs archive
+summary to summarize all water bodies with harmful algal blooms
+documented. This will show algal bloom trends in NYS over time.</p></li>
+<li><p>Spatial data showing NYS temperatures over time <a
+href="https://www.nyclimatescience.org/highlights/data_products"
+class="uri">https://www.nyclimatescience.org/highlights/data_products</a>
+I will be using the interactive map of annual maximum temperatures in
+New York State from the New York Climate Change Science Clearinghouse
+(NYCCSC) to select data from New York State stations and observe
+temperature trends over time. I could also use NOAA temperatures at
+varying weather stations across NYS.</p></li>
+<li><p>Annual Population Estimates for New York State and Counties:
+Beginning 1970 <a
+href="https://data.ny.gov/Government-Finance/Annual-Population-Estimates-for-New-York-State-and/krt9-ym2k/data"
+class="uri">https://data.ny.gov/Government-Finance/Annual-Population-Estimates-for-New-York-State-and/krt9-ym2k/data</a>
+I will be using this data to correlate a relationship between population
+density and HAB prevalence.</p></li>
+</ol>
+</div>
+<div id="proposed-methods" class="section level1">
+<h1>Proposed methods</h1>
+<p>I will use the raster or read_sf package to download spatial polygon
+data for NYS counties. I will use the merge function to join all data
+and the tmap package to create the choropleth maps. To create an
+interactive map to display the data listed above, I will use the leaflet
+package.</p>
+<ol style="list-style-type: decimal">
+<li><p>creating a choropleth map for: average populations at county
+level across NYS</p></li>
+<li><p>creating a time-series graph of temperature trends over time for
+NYS counties</p></li>
+<li><p>creating interactive maps that display the following when a
+country is clicked on: county, year, and type of algal bloom</p></li>
+</ol>
+</div>
+<div id="expected-results" class="section level1">
+<h1>Expected results</h1>
+<p>Overall, I believe this project will be a successful attempt at
+monitoring the predictability of harmful algal bloom prevalence in NYS.
+Based on my expectations of this outline, relevant data will be
+projected in an effective way to show statistically relevant
+correlations.</p>
+</div>
+<div id="materials-and-methods-1" class="section level1">
+<h1>Materials and Methods</h1>
+<div
+id="create-a-choroplethr-map-of-average-populations-at-county-level-across-nys"
+class="section level3">
+<h3>Create a choroplethr map of average populations at county level
+across NYS</h3>
+<pre class="r"><code>library(choroplethr)</code></pre>
+<pre><code>## Loading required package: acs</code></pre>
+<pre><code>## Loading required package: stringr</code></pre>
+<pre><code>## Loading required package: XML</code></pre>
+<pre><code>## 
+## Attaching package: &#39;acs&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:base&#39;:
+## 
+##     apply</code></pre>
+<pre class="r"><code>library(choroplethrMaps)
+library(janitor)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;janitor&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     chisq.test, fisher.test</code></pre>
+<pre class="r"><code>#default parameters
+data(df_pop_county)
+#zoom into new york state with additional reference map
+county_choropleth(df_pop_county,
+                  title = &quot;New York County Population Estimates, 2012&quot;,
+                  legend = &quot;Population&quot;,
+                  state_zoom = &quot;new york&quot;)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+</div>
+<div
+id="create-a-time-series-graph-of-temperature-trends-over-time-for-weather-stations-across-nys"
+class="section level3">
+<h3>Create a time-series graph of temperature trends over time for
+weather stations across NYS</h3>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
+## ✔ ggplot2 3.4.0      ✔ purrr   0.3.5 
+## ✔ tibble  3.1.8      ✔ dplyr   1.0.10
+## ✔ tidyr   1.2.1      ✔ forcats 0.5.2 
+## ✔ readr   2.1.3      
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::combine() masks acs::combine()
+## ✖ dplyr::filter()  masks stats::filter()
+## ✖ dplyr::lag()     masks stats::lag()</code></pre>
+<pre class="r"><code>library(dplyr)
+library(p8105.datasets)
+library(patchwork)
+library(ggridges)
+
+knitr::opts_chunk$set(
+  fig.width = 6,
+  fig.asp = .6,
+  out.width = &quot;90%&quot;
+)
+
+theme_set(theme_minimal() + theme(legend.position = &quot;bottom&quot;))
+
+options(
+  ggplot2.continuous.colour = &quot;viridis&quot;,
+  ggplot2.continuous.fill = &quot;viridis&quot;
+)
+
+scale_colour_discrete = scale_colour_viridis_d
+scale_fill_discrete = scale_fill_viridis_d
+
+data(ny_noaa)
+head(ny_noaa, 10)</code></pre>
+<pre><code>## # A tibble: 10 × 7
+##    id          date        prcp  snow  snwd tmax  tmin 
+##    &lt;chr&gt;       &lt;date&gt;     &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+##  1 US1NYAB0001 2007-11-01    NA    NA    NA &lt;NA&gt;  &lt;NA&gt; 
+##  2 US1NYAB0001 2007-11-02    NA    NA    NA &lt;NA&gt;  &lt;NA&gt; 
+##  3 US1NYAB0001 2007-11-03    NA    NA    NA &lt;NA&gt;  &lt;NA&gt; 
+##  4 US1NYAB0001 2007-11-04    NA    NA    NA &lt;NA&gt;  &lt;NA&gt; 
+##  5 US1NYAB0001 2007-11-05    NA    NA    NA &lt;NA&gt;  &lt;NA&gt; 
+##  6 US1NYAB0001 2007-11-06    NA    NA    NA &lt;NA&gt;  &lt;NA&gt; 
+##  7 US1NYAB0001 2007-11-07    NA    NA    NA &lt;NA&gt;  &lt;NA&gt; 
+##  8 US1NYAB0001 2007-11-08    NA    NA    NA &lt;NA&gt;  &lt;NA&gt; 
+##  9 US1NYAB0001 2007-11-09    NA    NA    NA &lt;NA&gt;  &lt;NA&gt; 
+## 10 US1NYAB0001 2007-11-10    NA    NA    NA &lt;NA&gt;  &lt;NA&gt;</code></pre>
+<pre class="r"><code>ny_noaa_structure = print(str(ny_noaa))</code></pre>
+<pre><code>## tibble [2,595,176 × 7] (S3: tbl_df/tbl/data.frame)
+##  $ id  : chr [1:2595176] &quot;US1NYAB0001&quot; &quot;US1NYAB0001&quot; &quot;US1NYAB0001&quot; &quot;US1NYAB0001&quot; ...
+##  $ date: Date[1:2595176], format: &quot;2007-11-01&quot; &quot;2007-11-02&quot; ...
+##  $ prcp: int [1:2595176] NA NA NA NA NA NA NA NA NA NA ...
+##  $ snow: int [1:2595176] NA NA NA NA NA NA NA NA NA NA ...
+##  $ snwd: int [1:2595176] NA NA NA NA NA NA NA NA NA NA ...
+##  $ tmax: chr [1:2595176] NA NA NA NA ...
+##  $ tmin: chr [1:2595176] NA NA NA NA ...
+##  - attr(*, &quot;spec&quot;)=
+##   .. cols(
+##   ..   id = col_character(),
+##   ..   date = col_date(format = &quot;&quot;),
+##   ..   prcp = col_integer(),
+##   ..   snow = col_integer(),
+##   ..   snwd = col_integer(),
+##   ..   tmax = col_character(),
+##   ..   tmin = col_character()
+##   .. )
+## NULL</code></pre>
+<pre class="r"><code>ny_noaa_tidy = 
+  ny_noaa %&gt;%
+  janitor::clean_names() %&gt;%
+  separate(date, into = c(&quot;Year&quot;, &quot;Month&quot;, &quot;Day&quot;)) %&gt;%
+  mutate(tmax = as.numeric(tmax), tmin = as.numeric(tmin), Year = as.numeric(Year), Month = as.numeric(Month), Day = as.numeric(Day)) %&gt;%
+   mutate(Month = month.name[Month]) %&gt;%
+  mutate(tmax = tmax/10, 
+         tmin = tmin/10, 
+         prcp = prcp/10)
+
+ny_noaa_summary =
+  ny_noaa_tidy %&gt;%
+  filter(Month %in% c(&quot;January&quot;, &quot;July&quot;)) %&gt;%
+  group_by(id, Year, Month) %&gt;%
+  summarize(mean_tmax = mean(tmax), na.rm = TRUE)</code></pre>
+<pre><code>## `summarise()` has grouped output by &#39;id&#39;, &#39;Year&#39;. You can override using the
+## `.groups` argument.</code></pre>
+<pre class="r"><code>ggplot(ny_noaa_summary, aes(x = Year, y = mean_tmax, group = Year, color = Month)) +
+    geom_boxplot() + 
+    facet_grid(. ~ Month) +
+    theme(legend.position = &quot;none&quot;) + 
+  labs(title = &quot;Average Maximum Temperature for New York State Weather Stations&quot;,y = &quot;Average Maximum Temperature (C)&quot;)</code></pre>
+<pre><code>## Warning: Removed 7058 rows containing non-finite values (`stat_boxplot()`).</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div
+id="create-an-interactive-map-displaying-county-year-and-type-of-algal-bloom-when-a-waterbody-is-clicked-on"
+class="section level3">
+<h3>Create an interactive map displaying county, year, and type of algal
+bloom when a waterbody is clicked on</h3>
+<pre class="r"><code>library(ggplot2)
+library(maps)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;maps&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:purrr&#39;:
+## 
+##     map</code></pre>
+<pre class="r"><code>library(leaflet)
+library(tidyverse)
+library(RColorBrewer)
+library(dplyr)
+library(tmap)
+
+noaa_df = readr::read_csv(&quot;data/Harmful_Algal_Bloom_Statewide_Occurrence_Summary__2012-2018.csv&quot;)</code></pre>
+<pre><code>## Rows: 880 Columns: 12</code></pre>
+<pre><code>## ── Column specification ────────────────────────────────────────────────────────
+## Delimiter: &quot;,&quot;
+## chr (6): Waterbody Name, County, Bloom Type, Date of First Listing, Date of ...
+## dbl (6): DEC Region, Year, Number of Weeks on DEC Notification List, Number ...
+## 
+## ℹ Use `spec()` to retrieve the full column specification for this data.
+## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>str(noaa_df)</code></pre>
+<pre><code>## spc_tbl_ [880 × 12] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ Waterbody Name                          : chr [1:880] &quot;Agawam Lake&quot; &quot;Agawam Lake&quot; &quot;Agawam Lake&quot; &quot;Agawam Lake&quot; ...
+##  $ County                                  : chr [1:880] &quot;Suffolk&quot; &quot;Suffolk&quot; &quot;Suffolk&quot; &quot;Suffolk&quot; ...
+##  $ DEC Region                              : num [1:880] 1 1 1 1 1 1 4 4 9 9 ...
+##  $ Year                                    : num [1:880] 2018 2017 2016 2015 2014 ...
+##  $ Bloom Type                              : chr [1:880] &quot;HT&quot; &quot;HT&quot; &quot;HT&quot; &quot;HT&quot; ...
+##  $ Date of First Listing                   : chr [1:880] &quot;05/25/2018&quot; &quot;05/26/2017&quot; &quot;06/10/2016&quot; &quot;05/22/2015&quot; ...
+##  $ Date of Last Listing                    : chr [1:880] &quot;10/26/2018&quot; &quot;10/27/2017&quot; &quot;11/04/2016&quot; &quot;10/30/2015&quot; ...
+##  $ Number of Weeks on DEC Notification List: num [1:880] 22 22 21 23 21 14 1 5 1 15 ...
+##  $ Number of Weeks with Updates            : num [1:880] 22 22 21 16 20 8 1 2 1 11 ...
+##  $ Latitude                                : num [1:880] 40.9 40.9 40.9 40.9 40.9 ...
+##  $ Longitude                               : num [1:880] -72.4 -72.4 -72.4 -72.4 -72.4 ...
+##  $ Location 1                              : chr [1:880] &quot;(40.8744011, -72.3921967)&quot; &quot;(40.8744011, -72.3921967)&quot; &quot;(40.8744011, -72.3921967)&quot; &quot;(40.8744011, -72.3921967)&quot; ...
+##  - attr(*, &quot;spec&quot;)=
+##   .. cols(
+##   ..   `Waterbody Name` = col_character(),
+##   ..   County = col_character(),
+##   ..   `DEC Region` = col_double(),
+##   ..   Year = col_double(),
+##   ..   `Bloom Type` = col_character(),
+##   ..   `Date of First Listing` = col_character(),
+##   ..   `Date of Last Listing` = col_character(),
+##   ..   `Number of Weeks on DEC Notification List` = col_double(),
+##   ..   `Number of Weeks with Updates` = col_double(),
+##   ..   Latitude = col_double(),
+##   ..   Longitude = col_double(),
+##   ..   `Location 1` = col_character()
+##   .. )
+##  - attr(*, &quot;problems&quot;)=&lt;externalptr&gt;</code></pre>
+<pre class="r"><code>m &lt;- leaflet(noaa_df, options = leafletOptions(minZoom = 6, dragging = TRUE)) %&gt;%
+  setView(lat = 43, lng = -75, zoom = 6) %&gt;%
+  setMaxBounds(lng1 = -70, 
+               lat1 = 40, 
+               lng2 = -80, 
+               lat2 = 45) %&gt;%
+  addTiles() %&gt;%
+  addMarkers(data = noaa_df,
+             popup= ~paste(`Waterbody Name`, &quot;&lt;br&gt;County:&quot;,`County`, &quot;&lt;br&gt;Bloom Type:&quot;, `Bloom Type`,&quot;&lt;br&gt;Coordinates:&quot;, `Location 1`))</code></pre>
+<pre><code>## Assuming &quot;Longitude&quot; and &quot;Latitude&quot; are longitude and latitude, respectively</code></pre>
+<pre class="r"><code>m  # Print the map</code></pre>
+<div id="htmlwidget-f7c9b61f67f1d901441f" style="width:90%;height:345.6px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f7c9b61f67f1d901441f">{"x":{"options":{"minZoom":6,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"dragging":true},"setView":[[43,-75],6,[]],"calls":[{"method":"setMaxBounds","args":[40,-70,45,-80]},{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[40.8744011,40.8744011,40.8744011,40.8744011,40.8744011,40.8744011,42.4768982,42.4768982,42.05595,42.05595,42.05595,42.05595,42.05595,42.05595,42.05595,42.5640984,40.638178,40.638178,42.0140991,42.1655998,42.1655998,42.1792984,42.1792984,42.1792984,42.1792984,40.88034,42.9011002,42.9011002,42.9011002,42.9011002,42.9388008,42.9388008,42.9388008,41.3595009,41.3595009,41.3595009,41.3595009,44.4599991,44.4599991,44.4599991,42.4812012,42.4812012,42.4812012,42.4812012,42.4812012,42.351299,41.4420013,41.4420013,41.4420013,41.4420013,41.4420013,42.0455017,42.0455017,42.0455017,42.0455017,42.4472008,42.0455017,42.448431,41.1948013,41.1948013,41.1948013,41.1948013,41.1948013,41.1948013,40.938789,42.6483002,42.6483002,40.61927,41.0780983,41.0780983,41.0780983,44.5379982,44.5379982,44.5379982,44.5379982,44.5379982,44.5379982,44.5379982,43.3382988,43.3382988,43.3382988,41.1916008,40.8268013,42.5186996,40.770707,40.770707,40.770707,40.770707,40.770707,44.3093987,44.3093987,42.8339996,40.6244011,40.6244011,41.3302994,40.6244011,40.6244011,41.3302994,40.6244011,41.4740982,41.4740982,41.4740982,41.4740982,42.6635017,42.6635017,42.6635017,43.28151,42.608922,42.5946999,42.5946999,44.3165016,44.3165016,44.3165016,44.3165016,42.8153,42.8153,42.7779999,42.7779999,42.7779999,42.7779999,42.7779999,42.7779999,42.7779999,42.7779999,42.1063004,42.1063004,43.2352982,42.705718,42.705718,42.705718,42.705718,42.705718,42.705718,42.705718,42.705718,42.705718,42.705718,42.909555,42.3670006,42.3670006,42.3670006,42.3670006,42.3670006,42.3670006,42.9482002,42.9482002,42.9482002,42.9482002,42.9482002,42.9482002,42.953701,42.7155991,42.156238,42.156238,42.156238,42.156238,42.156238,42.156238,42.156238,42.5825996,41.08419,41.4418983,41.7727013,41.7727013,41.7727013,40.6167984,40.6167984,40.6167984,40.6167984,42.834736,42.834736,42.7522011,42.7522011,42.7522011,42.7522011,41.1427994,40.8675995,40.8675995,42.144001,42.144001,42.144001,43.2005997,43.2005997,43.2005997,43.2005997,43.2005997,42.4076004,42.76085,42.76085,42.76085,42.76085,42.76085,42.76085,42.76085,43.300499,41.3781013,41.3781013,41.3781013,42.2533989,42.8106995,42.4477005,42.4477005,42.4477005,42.4477005,42.4477005,42.4477005,40.936537,41.9011,42.9329987,43.29321,42.8106995,42.8106995,42.53676,40.8852005,42.4620018,42.4620018,42.4620018,42.7490997,42.7490997,42.7490997,42.7490997,43.2332993,42.861907,44.6689987,44.6689987,44.6689987,44.6689987,41.121117,41.121117,41.121117,43.1278,43.1278,42.3275986,42.3862991,43.7789993,41.6825981,42.757,41.995246,41.765001,41.765001,41.765001,41.765001,40.8382988,40.8382988,40.8382988,42.1018982,42.1018982,42.1018982,42.1018982,42.1018982,43.064198,41.0416985,41.0416985,41.0416985,41.2224998,41.5918007,44.47488,44.47488,41.0158997,41.057541,41.057541,41.057541,43.6259003,40.9390984,40.9390984,40.9390984,40.9390984,40.9390984,40.9390984,42.5800018,42.5800018,42.5800018,43.3636017,42.480492,41.53344,40.7710991,40.7710991,40.7710991,40.7710991,42.1823997,40.950901,40.7118988,40.7118988,40.7118988,44.3400002,44.3400002,44.3400002,44.3400002,44.3400002,40.9780998,42.412899,43.4236984,41.0290985,40.7961006,40.7961006,40.7961006,40.7961006,40.7961006,42.8345985,42.8345985,42.8345985,41.3153992,41.3153992,43.0257988,43.0257988,43.0257988,42.3095016,42.7542,42.7542,42.7542,42.7542,42.7542,42.7542,42.7542,40.9478989,40.9478989,44.2435989,44.2435989,43.100662,43.100662,41.3731003,41.3731003,41.3731003,42.801067,42.801067,42.973999,42.973999,42.6313019,42.6313019,42.6313019,42.6313019,42.6313019,42.6313019,40.9272003,40.9272003,40.9272003,42.4934006,42.4934006,42.4934006,42.4934006,41.676899,42.34812,40.83061,41.385601,41.385601,41.385601,41.385601,41.385601,41.385601,40.7481003,40.7481003,40.7481003,40.7481003,40.7481003,40.7481003,43.0681992,43.0681992,41.8574982,41.2475014,40.696701,41.4584999,41.4584999,41.4584999,41.4584999,41.3862991,41.3862991,41.3862991,44.5694008,44.5694008,44.5694008,42.6772003,42.6772003,43.9789009,41.6828995,41.6828995,41.6828995,41.2853012,41.2853012,41.2853012,41.2853012,43.0508995,43.0508995,43.0508995,41.3419991,41.3419991,41.3419991,41.3419991,41.3419991,41.1837006,41.1837006,41.1837006,41.35558,41.3139992,41.3139992,41.3139992,41.3139992,41.3139992,41.3139992,42.8502007,42.8502007,42.8502007,42.8502007,43.3081017,43.3081017,43.3081017,43.3081017,43.3081017,43.3081017,44.3153992,41.58874,43.914122,43.914122,43.914122,43.914122,43.914122,43.914122,43.914122,43.914122,43.914122,43.914122,43.914122,43.914122,43.914122,43.914122,43.914122,43.914122,43.914122,43.914122,43.914122,41.2965012,41.2965012,41.3395004,41.3395004,41.3395004,41.3395004,44.3251991,43.4872017,41.3000984,41.3000984,40.821991,40.821991,40.821991,40.821991,40.821991,40.821991,43.3753014,43.2840004,41.2616997,41.4216995,41.297699,41.297699,41.297699,41.297699,41.297699,42.4057999,42.4057999,42.418768,42.418768,40.9789009,42.0103989,42.0103989,42.0103989,42.0103989,42.0103989,42.5391006,42.5391006,42.5391006,42.5391006,42.5391006,42.5391006,42.80634,42.4273987,42.4273987,42.4273987,42.4273987,40.9182014,40.9182014,42.0397987,41.21171,41.21171,41.21171,41.21171,42.792099,42.42023,42.792099,42.5499992,43.6670691,43.6670691,43.503741,41.270401,42.586096,40.991885,40.991885,40.991885,40.991885,40.991885,40.991885,43.06608,42.8336983,42.8336983,42.8336983,42.8336983,42.8336983,41.1254997,41.1254997,40.6222,40.6222,40.6222,40.6222,40.9071007,40.9012985,42.4702988,43.08393,43.08393,40.9145012,40.9145012,40.9145012,40.9145012,40.9145012,40.9145012,44.2921982,44.2921982,41.5252991,41.5252991,41.5252991,41.5252991,41.5252991,41.5252991,41.5252991,44.2542992,44.2542992,44.2542992,44.2542992,43.36144,41.75116,41.75116,41.75116,41.75116,41.75116,40.803761,40.803761,40.803761,41.6571007,41.4968987,42.4914017,41.2703018,41.2703018,42.5201988,42.5381012,42.5381012,42.5381012,42.5381012,42.5381012,42.5381012,42.9347,42.9347,41.2388,41.2388,41.2388,40.9463005,40.9463005,40.8989983,41.7901001,43.64303,43.64303,43.64303,43.64303,43.64303,43.64303,42.5497017,40.7585983,42.2117996,40.878721,40.878721,40.878721,40.878721,40.878721,42.5442009,43.2033005,43.2033005,43.2033005,43.2033005,43.2033005,43.2033005,43.2033005,43.2033005,43.2033005,43.2033005,43.2033005,43.2033005,43.2033005,43.2033005,43.2033005,43.2033005,43.2033005,43.2033005,43.2033005,43.2033005,43.2033005,43.2033005,43.2033005,43.2033005,43.210484,43.210484,43.210484,41.5488014,41.5488014,41.5488014,41.5488014,41.5488014,41.5488014,41.5488014,43.397788,42.8591003,42.8591003,42.8737984,42.8737984,42.8737984,42.8737984,42.8737984,42.8737984,41.548,41.4387016,43.3292007,41.5186005,44.2834015,41.362999,41.362999,41.362999,41.362999,41.362999,41.362999,41.362999,41.362999,41.362999,41.362999,40.9140015,40.916064,43.2854004,43.20679,43.2354012,43.2354012,41.6960983,41.6960983,42.5881004,42.5881004,42.5881004,43.2975998,43.2975998,40.9446983,40.9030991,40.6548996,40.6548996,40.6548996,40.6548996,40.6548996,40.6548996,41.4664001,41.4664001,41.4664001,41.4664001,41.4664001,41.4664001,42.0433006,42.0433006,42.0433006,42.0433006,40.498819,42.1027985,42.1027985,42.1027985,42.1027985,42.1027985,42.6375,41.4388008,41.4388008,41.4388008,41.4388008,41.4388008,42.1180992,41.1385994,41.1385994,41.1385994,41.1385994,41.1385994,41.1385994,41.1385994,41.1385994,41.885055,40.911804,40.911804,40.911804,40.911804,42.9339981,42.9339981,42.9339981,40.9104004,40.9104004,40.9104004,40.9104004,43.0167007,43.0167007,43.0167007,43.0167007,43.0167007,40.8847008,43.7747993,43.7747993,43.7747993,41.3765984,42.4424019,42.4424019,42.4424019,42.4424019,42.4424019,42.4424019,42.4424019,42.4424019,42.4424019,42.4424019,42.4424019,42.4424019,42.4424019,42.4424019,42.4424019,42.4424019,41.9598007,40.9462013,43.7443,40.9524002,40.9524002,42.69042,42.69042,41.0475006,42.69042,42.69042,44.2268982,42.69042,44.2268982,40.62325,40.62325,44.2798004,43.8291467,43.8291467,42.8451004,42.8451004,42.8451004,42.8451004,42.8451004,42.2943993,42.2943993,42.2943993,42.3888016,42.3888016,42.3888016,42.3888016,42.3888016,42.3888016,42.6631012,42.6631012,42.6631012,43.2482986,43.2482986,43.2482986,43.2482986,43.2482986,43.2482986,41.9101982,41.9101982,41.9101982,42.7723007,42.7723007,42.7723007,42.7723007,42.7723007,42.7723007,42.7723007,40.61927,43.62339,40.8737984,40.8737984,40.8737984,44.889843,40.9141998,40.9141998,41.8436012,42.875013,42.875013,42.900811,42.875013,43.2102013,43.2102013,42.5831985,41.58839,42.193635,41.0824013,41.0824013,40.775738,40.775738,40.775738,40.69744,42.269001,41.672699,42.5017014,41.4091988,41.4091988,41.4091988,42.857399,42.857399,40.70963,42.8664,41.2817001,41.2817001,42.7764015,42.7764015,42.7764015,42.7764015,42.7764015,42.7764015,42.7764015,40.7793007,40.7793007,40.7793007,40.7793007,40.7793007,42.8665009,42.8665009,41.2014999,41.2014999,41.5219002,42.19094,43.28994,43.119955,42.7547,41.6502991,40.69744,42.521009,40.8328,40.9292984,40.9292984,40.9292984,40.9292984,41.743866,41.743866,42.444741,42.444741,42.444741,42.444741,42.444741,42.444741,42.444741,42.444741,42.444741,42.444741,42.6250992,42.6250992,42.3745995,42.6571007,42.6571007,42.6571007,41.21707,41.21707,42.0404015,42.32912,40.8805008,40.8805008,40.8805008,41.95313,41.95313,41.95313,40.89548,40.6055984,40.6055984,41.5387993,41.5387993,40.5157013,41.5866013,41.5866013,42.7661018,42.7661018],[-72.3921967,-72.3921967,-72.3921967,-72.3921967,-72.3921967,-72.3921967,-73.9375992,-73.9375992,-78.89069,-78.89069,-78.89069,-78.89069,-78.89069,-78.89069,-78.89069,-75.3058014,-74.102585,-74.102585,-78.0014038,-77.793602,-77.793602,-75.4252014,-75.4252014,-75.4252014,-75.4252014,-72.93823,-77.668602,-77.668602,-77.668602,-77.668602,-73.8578033,-73.8578033,-73.8578033,-73.8126984,-73.8126984,-73.8126984,-73.8126984,-74.2594986,-74.2594986,-74.2594986,-74.0139008,-74.0139008,-74.0139008,-74.0139008,-74.0139008,-79.385841,-74.1158981,-74.1158981,-74.1158981,-74.1158981,-74.1158981,-75.6657028,-75.6657028,-75.6657028,-75.6657028,-78.3965988,-75.6657028,-78.397214,-73.7036972,-73.7036972,-73.7036972,-73.7036972,-73.7036972,-73.7036972,-72.685211,-73.487999,-73.487999,-73.95696,-71.9101028,-71.9101028,-71.9101028,-75.5688019,-75.5688019,-75.5688019,-75.5688019,-75.5688019,-75.5688019,-75.5688019,-76.728302,-76.728302,-76.728302,-73.5922012,-73.2197037,-75.6885986,-73.808255,-73.808255,-73.808255,-73.808255,-73.808255,-75.7397003,-75.7397003,-75.6622009,-74.1203003,-74.1203003,-73.9946976,-74.1203003,-74.1203003,-73.9946976,-74.1203003,-74.0867996,-74.0867996,-74.0867996,-74.0867996,-73.8070984,-73.8070984,-73.8070984,-77.66383,-73.568627,-73.5614014,-73.5614014,-75.7751999,-75.7751999,-75.7751999,-75.7751999,-75.0061035,-75.0061035,-77.3050995,-77.3050995,-77.3050995,-77.3050995,-77.3050995,-77.3050995,-77.3050995,-77.3050995,-75.2809982,-75.2809982,-77.2974014,-76.696105,-76.696105,-76.696105,-76.696105,-76.696105,-76.696105,-76.696105,-76.696105,-76.696105,-76.696105,-76.799193,-76.7352982,-76.7352982,-76.7352982,-76.7352982,-76.7352982,-76.7352982,-75.8720016,-75.8720016,-75.8720016,-75.8720016,-75.8720016,-75.8720016,-75.185997,-74.365799,-79.393483,-79.393483,-79.393483,-79.393483,-79.393483,-79.393483,-79.393483,-75.4412003,-74.06221,-73.7434998,-73.9838028,-73.9838028,-73.9838028,-74.1075974,-74.1075974,-74.1075974,-74.1075974,-77.704561,-77.704561,-77.7186966,-77.7186966,-77.7186966,-77.7186966,-73.9396973,-72.4021988,-72.4021988,-73.5954971,-73.5954971,-73.5954971,-73.4234009,-73.4234009,-73.4234009,-73.4234009,-73.4234009,-73.8778,-75.55753,-75.55753,-75.55753,-75.55753,-75.55753,-75.55753,-75.55753,-77.6973038,-73.6547012,-73.6547012,-73.6547012,-78.2928009,-75.8886032,-76.0034027,-76.0034027,-76.0034027,-76.0034027,-76.0034027,-76.0034027,-72.831295,-75.032318,-78.8703003,-75.47231,-75.8886032,-75.8886032,-77.30129,-72.5659027,-76.2725983,-76.2725983,-76.2725983,-74.1126022,-74.1126022,-74.1126022,-74.1126022,-77.5576019,-76.511026,-74.2738037,-74.2738037,-74.2738037,-74.2738037,-73.960648,-73.960648,-73.960648,-74.4800034,-74.4800034,-75.2145004,-75.8507004,-74.7024002,-73.5470963,-74.652298,-73.997576,-74.652425,-74.652425,-74.652425,-74.652425,-73.8940964,-73.8940964,-73.8940964,-79.7261963,-79.7261963,-79.7261963,-79.7261963,-79.7261963,-78.826684,-71.9532013,-71.9532013,-71.9532013,-74.2223969,-74.9380035,-74.500328,-74.500328,-72.024498,-72.335788,-72.335788,-72.335788,-73.8440018,-72.2291031,-72.2291031,-72.2291031,-72.2291031,-72.2291031,-72.2291031,-75.1283035,-75.1283035,-75.1283035,-73.6732025,-75.492493,-74.04531,-73.7649002,-73.7649002,-73.7649002,-73.7649002,-77.2708969,-73.7714005,-73.7986984,-73.7986984,-73.7986984,-75.7152023,-75.7152023,-75.7152023,-75.7152023,-75.7152023,-73.8475037,-75.4993973,-73.5719986,-73.8576965,-73.9512024,-73.9512024,-73.9512024,-73.9512024,-73.9512024,-75.677803,-75.677803,-75.677803,-73.9913025,-73.9913025,-76.1687012,-76.1687012,-76.1687012,-73.8844986,-77.5115967,-77.5115967,-77.5115967,-77.5115967,-77.5115967,-77.5115967,-77.5115967,-72.1900024,-72.1900024,-75.8331985,-75.8331985,-79.022324,-79.022324,-73.8877029,-73.8877029,-73.8877029,-73.911808,-73.911808,-76.0690994,-76.0690994,-78.3439026,-78.3439026,-78.3439026,-78.3439026,-78.3439026,-78.3439026,-72.3174973,-72.3174973,-72.3174973,-77.1395035,-77.1395035,-77.1395035,-77.1395035,-74.6663971,-73.66359,-73.75195,-73.7498016,-73.7498016,-73.7498016,-73.7498016,-73.7498016,-73.7498016,-73.8054962,-73.8054962,-73.8054962,-73.8054962,-73.8054962,-73.8054962,-74.7705002,-74.7705002,-74.9628983,-74.0034027,-73.3007965,-73.6650009,-73.6650009,-73.6650009,-73.6650009,-73.7099991,-73.7099991,-73.7099991,-73.1817017,-73.1817017,-73.1817017,-76.3024979,-76.3024979,-74.4664001,-74.9904022,-74.9904022,-74.9904022,-73.6549988,-73.6549988,-73.6549988,-73.6549988,-77.4794006,-77.4794006,-77.4794006,-73.7254028,-73.7254028,-73.7254028,-73.7254028,-73.7254028,-73.9978027,-73.9978027,-73.9978027,-73.7784,-73.8488007,-73.8488007,-73.8488007,-73.8488007,-73.8488007,-73.8488007,-75.5222015,-75.5222015,-75.5222015,-75.5222015,-76.4372025,-76.4372025,-76.4372025,-76.4372025,-76.4372025,-76.4372025,-75.7277985,-73.87979,-76.123662,-76.123662,-76.123662,-76.123662,-76.123662,-76.123662,-76.123662,-76.123662,-76.123662,-76.123662,-76.123662,-76.123662,-76.123662,-76.123662,-76.123662,-76.123662,-76.123662,-76.123662,-76.123662,-73.5614014,-73.5614014,-73.8827972,-73.8827972,-73.8827972,-73.8827972,-73.959198,-74.3638,-73.5627975,-73.5627975,-73.11927,-73.11927,-73.11927,-73.11927,-73.11927,-73.11927,-73.6397018,-76.2594986,-74.0878983,-73.6109009,-73.5840988,-73.5840988,-73.5840988,-73.5840988,-73.5840988,-77.0777969,-77.0777969,-77.089605,-77.089605,-72.5575027,-75.4803009,-75.4803009,-75.4803009,-75.4803009,-75.4803009,-73.9598999,-73.9598999,-73.9598999,-73.9598999,-73.9598999,-73.9598999,-75.61002,-78.4792023,-78.4792023,-78.4792023,-78.4792023,-72.4085007,-72.4085007,-74.7472,-74.19939,-74.19939,-74.19939,-74.19939,-73.4386978,-75.84813,-73.4386978,-74.4929962,-73.8478694,-73.8478694,-75.89079,-73.9229965,-74.5213227,-72.523684,-72.523684,-72.523684,-72.523684,-72.523684,-72.523684,-76.08091,-74.1119003,-74.1119003,-74.1119003,-74.1119003,-74.1119003,-72.3333969,-72.3333969,-74.1167984,-74.1167984,-74.1167984,-74.1167984,-72.7953033,-72.3333969,-75.8740997,-78.05583,-78.05583,-72.3582993,-72.3582993,-72.3582993,-72.3582993,-72.3582993,-72.3582993,-75.7675018,-75.7675018,-74.9172974,-74.9172974,-74.9172974,-74.9172974,-74.9172974,-74.9172974,-74.9172974,-75.732399,-75.732399,-75.732399,-75.732399,-73.68388,-74.651001,-74.651001,-74.651001,-74.651001,-74.651001,-73.958943,-73.958943,-73.958943,-74.8147964,-74.0309982,-77.2791977,-73.7113037,-73.7113037,-74.1501999,-73.6037979,-73.6037979,-73.6037979,-73.6037979,-73.6037979,-73.6037979,-77.0932999,-77.0932999,-73.8219986,-73.8219986,-73.8219986,-73.8013,-73.8013,-72.8195038,-73.7851028,-76.1851399,-76.1851399,-76.1851399,-76.1851399,-76.1851399,-76.1851399,-75.4869995,-73.7595978,-73.831398,-72.372558,-72.372558,-72.372558,-72.372558,-72.372558,-74.0848999,-75.9100037,-75.9100037,-75.9100037,-75.9100037,-75.9100037,-75.9100037,-75.9100037,-75.9100037,-75.9100037,-75.9100037,-75.9100037,-75.9100037,-75.9100037,-75.9100037,-75.9100037,-75.9100037,-75.9100037,-75.9100037,-75.9100037,-75.9100037,-75.9100037,-75.9100037,-75.9100037,-75.9100037,-76.266313,-76.266313,-76.266313,-74.1036987,-74.1036987,-74.1036987,-74.1036987,-74.1036987,-74.1036987,-74.1036987,-76.471383,-76.2794037,-76.2794037,-76.5281982,-76.5281982,-76.5281982,-76.5281982,-76.5281982,-76.5281982,-73.69487,-73.6734009,-75.908699,-73.6149979,-75.6455994,-73.5800018,-73.5800018,-73.5800018,-73.5800018,-73.5800018,-73.5800018,-73.5800018,-73.5800018,-73.5800018,-73.5800018,-72.7177963,-72.694956,-76.2677002,-75.47633,-76.222702,-76.222702,-74.6279984,-74.6279984,-75.651001,-75.651001,-75.651001,-76.8320999,-76.8320999,-72.2854004,-72.8199005,-73.969902,-73.969902,-73.969902,-73.969902,-73.969902,-73.969902,-73.5395966,-73.5395966,-73.5395966,-73.5395966,-73.5395966,-73.5395966,-78.8677979,-78.8677979,-78.8677979,-78.8677979,-74.246519,-78.7445984,-78.7445984,-78.7445984,-78.7445984,-78.7445984,-73.54076,-73.8075027,-73.8075027,-73.8075027,-73.8075027,-73.8075027,-73.5552979,-73.9227982,-73.9227982,-73.9227982,-73.9227982,-73.9227982,-73.9227982,-73.9227982,-73.9227982,-74.029968,-73.123789,-73.123789,-73.123789,-73.123789,-73.7828979,-73.7828979,-73.7828979,-72.2910995,-72.2910995,-72.2910995,-72.2910995,-73.7415009,-73.7415009,-73.7415009,-73.7415009,-73.7415009,-72.3529968,-73.7779999,-73.7779999,-73.7779999,-73.7873001,-76.884697,-76.884697,-76.884697,-76.884697,-76.884697,-76.884697,-76.884697,-76.884697,-76.884697,-76.884697,-76.884697,-76.884697,-76.884697,-76.884697,-76.884697,-76.884697,-73.8376007,-73.1156998,-74.73191,-73.774498,-73.774498,-78.02907,-78.02907,-73.7468033,-78.02907,-78.02907,-74.8265991,-78.02907,-74.8265991,-74.096163,-74.096163,-75.7750015,-76.1264733,-76.1264733,-76.3503036,-76.3503036,-76.3503036,-76.3503036,-76.3503036,-73.8069,-73.8069,-73.8069,-77.4744034,-77.4744034,-77.4744034,-77.4744034,-77.4744034,-77.4744034,-73.634697,-73.634697,-73.634697,-76.9585037,-76.9585037,-76.9585037,-76.9585037,-76.9585037,-76.9585037,-75.2289963,-75.2289963,-75.2289963,-76.146864,-76.146864,-76.146864,-76.146864,-76.146864,-76.146864,-76.146864,-73.95696,-76.19037,-72.9587021,-72.9587021,-72.9587021,-75.120136,-73.1470032,-73.1470032,-74.0426025,-77.276525,-77.276525,-76.528124,-77.276525,-73.4632034,-73.4632034,-74.5814972,-73.69782,-77.251116,-73.8420029,-73.8420029,-73.971765,-73.971765,-73.971765,-73.97944,-75.7279968,-74.2482986,-74.7127991,-74.2233963,-74.2233963,-74.2233963,-73.5681992,-73.5681992,-73.32589,-73.55556,-73.5533981,-73.5533981,-76.1352005,-76.1352005,-76.1352005,-76.1352005,-76.1352005,-76.1352005,-76.1352005,-73.9673996,-73.9673996,-73.9673996,-73.9673996,-73.9673996,-75.7585983,-75.7585983,-74.2058029,-74.2058029,-74.0615005,-77.358066,-75.417986,-77.405022,-78.7258,-74.2203979,-73.97944,-73.60809,-73.10937,-72.2425995,-72.2425995,-72.2425995,-72.2425995,-74.093447,-74.093447,-77.100706,-77.100706,-77.100706,-77.100706,-77.100706,-77.100706,-77.100706,-77.100706,-77.100706,-77.100706,-74.0791016,-74.0791016,-75.6464005,-73.7733002,-73.7733002,-73.7733002,-74.19247,-74.19247,-75.6368027,-75.96575,-72.3676987,-72.3676987,-72.3676987,-73.7264511,-73.7264511,-73.7264511,-72.674984,-74.1578979,-74.1578979,-74.2752991,-74.2752991,-74.1922989,-74.5880966,-74.5880966,-78.2934036,-78.2934036],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["Agawam Lake <br>County: Suffolk <br>Bloom Type: HT <br>Coordinates: (40.8744011, -72.3921967)","Agawam Lake <br>County: Suffolk <br>Bloom Type: HT <br>Coordinates: (40.8744011, -72.3921967)","Agawam Lake <br>County: Suffolk <br>Bloom Type: HT <br>Coordinates: (40.8744011, -72.3921967)","Agawam Lake <br>County: Suffolk <br>Bloom Type: HT <br>Coordinates: (40.8744011, -72.3921967)","Agawam Lake <br>County: Suffolk <br>Bloom Type: HT <br>Coordinates: (40.8744011, -72.3921967)","Agawam Lake <br>County: Suffolk <br>Bloom Type: HT <br>Coordinates: (40.8744011, -72.3921967)","Alcove Reservoir <br>County: Albany <br>Bloom Type: S <br>Coordinates: (42.4768982, -73.9375992)","Alcove Reservoir <br>County: Albany <br>Bloom Type: C <br>Coordinates: (42.4768982, -73.9375992)","Allegheny Reservoir <br>County: Cattaraugus <br>Bloom Type: S <br>Coordinates: (42.05595, -78.89069)","Allegheny Reservoir <br>County: Cattaraugus <br>Bloom Type: C <br>Coordinates: (42.05595, -78.89069)","Allegheny Reservoir <br>County: Cattaraugus <br>Bloom Type: C <br>Coordinates: (42.05595, -78.89069)","Allegheny Reservoir <br>County: Cattaraugus <br>Bloom Type: C <br>Coordinates: (42.05595, -78.89069)","Allegheny Reservoir <br>County: Cattaraugus <br>Bloom Type: C <br>Coordinates: (42.05595, -78.89069)","Allegheny Reservoir <br>County: Cattaraugus <br>Bloom Type: S <br>Coordinates: (42.05595, -78.89069)","Allegheny Reservoir <br>County: Cattaraugus <br>Bloom Type: S <br>Coordinates: (42.05595, -78.89069)","Allens Pond <br>County: Otsego <br>Bloom Type: C <br>Coordinates: (42.5640984, -75.3058014)","Allison Pond <br>County: Richmond <br>Bloom Type: C <br>Coordinates: (40.638178, -74.102585)","Allison Pond <br>County: Richmond <br>Bloom Type: C <br>Coordinates: (40.638178, -74.102585)","Alma Pond <br>County: Allegany <br>Bloom Type: S <br>Coordinates: (42.0140991, -78.0014038)","Andover Pond <br>County: Allegany <br>Bloom Type: C <br>Coordinates: (42.1655998, -77.793602)","Andover Pond <br>County: Allegany <br>Bloom Type: C <br>Coordinates: (42.1655998, -77.793602)","Arctic Lake <br>County: Broome <br>Bloom Type: S <br>Coordinates: (42.1792984, -75.4252014)","Arctic Lake <br>County: Broome <br>Bloom Type: S <br>Coordinates: (42.1792984, -75.4252014)","Arctic Lake <br>County: Broome <br>Bloom Type: S <br>Coordinates: (42.1792984, -75.4252014)","Arctic Lake <br>County: Broome <br>Bloom Type: S <br>Coordinates: (42.1792984, -75.4252014)","Artist Lake <br>County: Suffolk <br>Bloom Type: HT <br>Coordinates: (40.88034, -72.93823)","Avon Marsh Dam Pond <br>County: Livingston <br>Bloom Type: HT <br>Coordinates: (42.9011002, -77.668602)","Avon Marsh Dam Pond <br>County: Livingston <br>Bloom Type: HT <br>Coordinates: (42.9011002, -77.668602)","Avon Marsh Dam Pond <br>County: Livingston <br>Bloom Type: HT <br>Coordinates: (42.9011002, -77.668602)","Avon Marsh Dam Pond <br>County: Livingston <br>Bloom Type: HT <br>Coordinates: (42.9011002, -77.668602)","Ballston Lake <br>County: Saratoga <br>Bloom Type: C <br>Coordinates: (42.9388008, -73.8578033)","Ballston Lake <br>County: Saratoga <br>Bloom Type: C <br>Coordinates: (42.9388008, -73.8578033)","Ballston Lake <br>County: Saratoga <br>Bloom Type: C <br>Coordinates: (42.9388008, -73.8578033)","Barger Pond <br>County: Putnam <br>Bloom Type: C <br>Coordinates: (41.3595009, -73.8126984)","Barger Pond <br>County: Putnam <br>Bloom Type: S <br>Coordinates: (41.3595009, -73.8126984)","Barger Pond <br>County: Putnam <br>Bloom Type: S <br>Coordinates: (41.3595009, -73.8126984)","Barger Pond <br>County: Putnam <br>Bloom Type: S <br>Coordinates: (41.3595009, -73.8126984)","Barnum Pond <br>County: Franklin <br>Bloom Type: S <br>Coordinates: (44.4599991, -74.2594986)","Barnum Pond <br>County: Franklin <br>Bloom Type: C <br>Coordinates: (44.4599991, -74.2594986)","Barnum Pond <br>County: Franklin <br>Bloom Type: S <br>Coordinates: (44.4599991, -74.2594986)","Basic Creek Reservoir <br>County: Albany <br>Bloom Type: S <br>Coordinates: (42.4812012, -74.0139008)","Basic Creek Reservoir <br>County: Albany <br>Bloom Type: S <br>Coordinates: (42.4812012, -74.0139008)","Basic Creek Reservoir <br>County: Albany <br>Bloom Type: C <br>Coordinates: (42.4812012, -74.0139008)","Basic Creek Reservoir <br>County: Albany <br>Bloom Type: HT <br>Coordinates: (42.4812012, -74.0139008)","Basic Creek Reservoir <br>County: Albany <br>Bloom Type: HT <br>Coordinates: (42.4812012, -74.0139008)","Bear Lake <br>County: Chautauqua <br>Bloom Type: S <br>Coordinates: (42.351299, -79.385841)","Beaver Dam Lake <br>County: Orange <br>Bloom Type: HT <br>Coordinates: (41.4420013, -74.1158981)","Beaver Dam Lake <br>County: Orange <br>Bloom Type: C <br>Coordinates: (41.4420013, -74.1158981)","Beaver Dam Lake <br>County: Orange <br>Bloom Type: S <br>Coordinates: (41.4420013, -74.1158981)","Beaver Dam Lake <br>County: Orange <br>Bloom Type: HT <br>Coordinates: (41.4420013, -74.1158981)","Beaver Dam Lake <br>County: Orange <br>Bloom Type: HT <br>Coordinates: (41.4420013, -74.1158981)","Beaver Lake <br>County: Broome <br>Bloom Type: C <br>Coordinates: (42.0455017, -75.6657028)","Beaver Lake <br>County: Broome <br>Bloom Type: C <br>Coordinates: (42.0455017, -75.6657028)","Beaver Lake <br>County: Broome <br>Bloom Type: C <br>Coordinates: (42.0455017, -75.6657028)","Beaver Lake <br>County: Broome <br>Bloom Type: HT <br>Coordinates: (42.0455017, -75.6657028)","Beaver Lake <br>County: Cattaraugus <br>Bloom Type: S <br>Coordinates: (42.4472008, -78.3965988)","Beaver Lake <br>County: Broome <br>Bloom Type: C <br>Coordinates: (42.0455017, -75.6657028)","Beaver Lake Inlet <br>County: Cattaraugus <br>Bloom Type: S <br>Coordinates: (42.448431, -78.397214)","Bedford Lake <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.1948013, -73.7036972)","Bedford Lake <br>County: Westchester <br>Bloom Type: HT <br>Coordinates: (41.1948013, -73.7036972)","Bedford Lake <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.1948013, -73.7036972)","Bedford Lake <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.1948013, -73.7036972)","Bedford Lake <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.1948013, -73.7036972)","Bedford Lake <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.1948013, -73.7036972)","Beverly's Pond <br>County: Chemung <br>Bloom Type: S <br>Coordinates: (40.938789, -72.685211)","Big Bowman Pond <br>County: Rensselaer <br>Bloom Type: C <br>Coordinates: (42.6483002, -73.487999)","Big Bowman Pond <br>County: Rensselaer <br>Bloom Type: C <br>Coordinates: (42.6483002, -73.487999)","Big Fresh Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.61927, -73.95696)","Big Reed Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (41.0780983, -71.9101028)","Big Reed Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (41.0780983, -71.9101028)","Big Reed Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (41.0780983, -71.9101028)","Black Lake <br>County: St Lawrence <br>Bloom Type: C <br>Coordinates: (44.5379982, -75.5688019)","Black Lake <br>County: St Lawrence <br>Bloom Type: C <br>Coordinates: (44.5379982, -75.5688019)","Black Lake <br>County: St Lawrence <br>Bloom Type: C <br>Coordinates: (44.5379982, -75.5688019)","Black Lake <br>County: St Lawrence <br>Bloom Type: HT <br>Coordinates: (44.5379982, -75.5688019)","Black Lake <br>County: St Lawrence <br>Bloom Type: HT <br>Coordinates: (44.5379982, -75.5688019)","Black Lake <br>County: St Lawrence <br>Bloom Type: HT <br>Coordinates: (44.5379982, -75.5688019)","Black Lake <br>County: St Lawrence <br>Bloom Type: HT <br>Coordinates: (44.5379982, -75.5688019)","Blind Sodus Bay <br>County: Wayne <br>Bloom Type: C <br>Coordinates: (43.3382988, -76.728302)","Blind Sodus Bay <br>County: Wayne <br>Bloom Type: C <br>Coordinates: (43.3382988, -76.728302)","Blind Sodus Bay <br>County: Cayuga <br>Bloom Type: S <br>Coordinates: (43.3382988, -76.728302)","Blue Heron Lake <br>County: Westchester <br>Bloom Type: HT <br>Coordinates: (41.1916008, -73.5922012)","Blydenburg Lake <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.8268013, -73.2197037)","Bowman Lake <br>County: Chenango <br>Bloom Type: S <br>Coordinates: (42.5186996, -75.6885986)","Bowne Pond <br>County: Queens <br>Bloom Type: HT <br>Coordinates: (40.770707, -73.808255)","Bowne Pond <br>County: Queens <br>Bloom Type: C <br>Coordinates: (40.770707, -73.808255)","Bowne Pond <br>County: Queens <br>Bloom Type: C <br>Coordinates: (40.770707, -73.808255)","Bowne Pond <br>County: Queens <br>Bloom Type: C <br>Coordinates: (40.770707, -73.808255)","Bowne Pond <br>County: Queens <br>Bloom Type: S <br>Coordinates: (40.770707, -73.808255)","Boyd Lake <br>County: Jefferson <br>Bloom Type: HT <br>Coordinates: (44.3093987, -75.7397003)","Boyd Lake <br>County: Jefferson <br>Bloom Type: HT <br>Coordinates: (44.3093987, -75.7397003)","Bradley Brook Reservoir <br>County: Madison <br>Bloom Type: C <br>Coordinates: (42.8339996, -75.6622009)","Brooks Lake <br>County: Richmond <br>Bloom Type: C <br>Coordinates: (40.6244011, -74.1203003)","Brooks Lake <br>County: Orange <br>Bloom Type: S <br>Coordinates: (40.6244011, -74.1203003)","Brooks Lake <br>County: Orange <br>Bloom Type: S <br>Coordinates: (41.3302994, -73.9946976)","Brooks Lake <br>County: Richmond <br>Bloom Type: HT <br>Coordinates: (40.6244011, -74.1203003)","Brooks Lake <br>County: Richmond <br>Bloom Type: C <br>Coordinates: (40.6244011, -74.1203003)","Brooks Lake <br>County: Orange <br>Bloom Type: C <br>Coordinates: (41.3302994, -73.9946976)","Brooks Lake <br>County: Richmond <br>Bloom Type: HT <br>Coordinates: (40.6244011, -74.1203003)","Brown's Pond <br>County: Orange <br>Bloom Type: S <br>Coordinates: (41.4740982, -74.0867996)","Brown's Pond <br>County: Orange <br>Bloom Type: S <br>Coordinates: (41.4740982, -74.0867996)","Brown's Pond <br>County: Orange <br>Bloom Type: C <br>Coordinates: (41.4740982, -74.0867996)","Brown's Pond <br>County: Orange <br>Bloom Type: C <br>Coordinates: (41.4740982, -74.0867996)","Buckingham Lake <br>County: Albany <br>Bloom Type: C <br>Coordinates: (42.6635017, -73.8070984)","Buckingham Lake <br>County: Albany <br>Bloom Type: C <br>Coordinates: (42.6635017, -73.8070984)","Buckingham Lake <br>County: Albany <br>Bloom Type: C <br>Coordinates: (42.6635017, -73.8070984)","Buck Pond <br>County: Monroe <br>Bloom Type: C <br>Coordinates: (43.28151, -77.66383)","Burden Lake <br>County: Rensselaer <br>Bloom Type: C <br>Coordinates: (42.608922, -73.568627)","Burden Lake <br>County: Rensselaer <br>Bloom Type: C <br>Coordinates: (42.5946999, -73.5614014)","Burden Third Lake <br>County: Rensselaer <br>Bloom Type: C <br>Coordinates: (42.5946999, -73.5614014)","Butterfield Lake <br>County: Jefferson <br>Bloom Type: C <br>Coordinates: (44.3165016, -75.7751999)","Butterfield Lake <br>County: Jefferson <br>Bloom Type: C <br>Coordinates: (44.3165016, -75.7751999)","Butterfield Lake <br>County: Jefferson <br>Bloom Type: C <br>Coordinates: (44.3165016, -75.7751999)","Butterfield Lake <br>County: Jefferson <br>Bloom Type: C <br>Coordinates: (44.3165016, -75.7751999)","Canadarago Lake <br>County: Otsego <br>Bloom Type: C <br>Coordinates: (42.8153, -75.0061035)","Canadarago Lake <br>County: Otsego <br>Bloom Type: C <br>Coordinates: (42.8153, -75.0061035)","Canandaigua Lake <br>County: Ontario <br>Bloom Type: HT <br>Coordinates: (42.7779999, -77.3050995)","Canandaigua Lake <br>County: Yates <br>Bloom Type: HT <br>Coordinates: (42.7779999, -77.3050995)","Canandaigua Lake <br>County: Ontario <br>Bloom Type: HT <br>Coordinates: (42.7779999, -77.3050995)","Canandaigua Lake <br>County: Yates <br>Bloom Type: HT <br>Coordinates: (42.7779999, -77.3050995)","Canandaigua Lake <br>County: Yates <br>Bloom Type: C <br>Coordinates: (42.7779999, -77.3050995)","Canandaigua Lake <br>County: Ontario <br>Bloom Type: C <br>Coordinates: (42.7779999, -77.3050995)","Canandaigua Lake <br>County: Yates <br>Bloom Type: HT <br>Coordinates: (42.7779999, -77.3050995)","Canandaigua Lake <br>County: Ontario <br>Bloom Type: HT <br>Coordinates: (42.7779999, -77.3050995)","Cannonsville Reservoir <br>County: Delaware <br>Bloom Type: S <br>Coordinates: (42.1063004, -75.2809982)","Cannonsville Reservoir <br>County: Delaware <br>Bloom Type: C <br>Coordinates: (42.1063004, -75.2809982)","Casey Park Pond <br>County: Wayne <br>Bloom Type: S <br>Coordinates: (43.2352982, -77.2974014)","Cayuga Lake <br>County: Cayuga <br>Bloom Type: HT <br>Coordinates: (42.705718, -76.696105)","Cayuga Lake <br>County: Tompkins <br>Bloom Type: HT <br>Coordinates: (42.705718, -76.696105)","Cayuga Lake <br>County: Seneca <br>Bloom Type: HT <br>Coordinates: (42.705718, -76.696105)","Cayuga Lake <br>County: Cayuga <br>Bloom Type: HT <br>Coordinates: (42.705718, -76.696105)","Cayuga Lake <br>County: Tompkins <br>Bloom Type: C <br>Coordinates: (42.705718, -76.696105)","Cayuga Lake <br>County: Seneca <br>Bloom Type: C <br>Coordinates: (42.705718, -76.696105)","Cayuga Lake <br>County: Cayuga <br>Bloom Type: C <br>Coordinates: (42.705718, -76.696105)","Cayuga Lake <br>County: Cayuga <br>Bloom Type: C <br>Coordinates: (42.705718, -76.696105)","Cayuga Lake <br>County: Tompkins <br>Bloom Type: C <br>Coordinates: (42.705718, -76.696105)","Cayuga Lake <br>County: Seneca <br>Bloom Type: C <br>Coordinates: (42.705718, -76.696105)","Cayuga-Seneca Canal <br>County: Seneca <br>Bloom Type: C <br>Coordinates: (42.909555, -76.799193)","Cayuta Lake <br>County: Schuyler <br>Bloom Type: HT <br>Coordinates: (42.3670006, -76.7352982)","Cayuta Lake <br>County: Schuyler <br>Bloom Type: HT <br>Coordinates: (42.3670006, -76.7352982)","Cayuta Lake <br>County: Schuyler <br>Bloom Type: C <br>Coordinates: (42.3670006, -76.7352982)","Cayuta Lake <br>County: Schuyler <br>Bloom Type: C <br>Coordinates: (42.3670006, -76.7352982)","Cayuta Lake <br>County: Schuyler <br>Bloom Type: C <br>Coordinates: (42.3670006, -76.7352982)","Cayuta Lake <br>County: Schuyler <br>Bloom Type: S <br>Coordinates: (42.3670006, -76.7352982)","Cazenovia Lake <br>County: Madison <br>Bloom Type: C <br>Coordinates: (42.9482002, -75.8720016)","Cazenovia Lake <br>County: Madison <br>Bloom Type: C <br>Coordinates: (42.9482002, -75.8720016)","Cazenovia Lake <br>County: Madison <br>Bloom Type: C <br>Coordinates: (42.9482002, -75.8720016)","Cazenovia Lake <br>County: Madison <br>Bloom Type: C <br>Coordinates: (42.9482002, -75.8720016)","Cazenovia Lake <br>County: Madison <br>Bloom Type: C <br>Coordinates: (42.9482002, -75.8720016)","Cazenovia Lake <br>County: Madison <br>Bloom Type: HT <br>Coordinates: (42.9482002, -75.8720016)","Cedar Lake <br>County: Herkimer <br>Bloom Type: C <br>Coordinates: (42.953701, -75.185997)","Central Bridge Upper Reservoir <br>County: Schoharie <br>Bloom Type: HT <br>Coordinates: (42.7155991, -74.365799)","Chautauqua Lake <br>County: Chautauqua <br>Bloom Type: HT <br>Coordinates: (42.156238, -79.393483)","Chautauqua Lake <br>County: Chautauqua <br>Bloom Type: HT <br>Coordinates: (42.156238, -79.393483)","Chautauqua Lake <br>County: Chautauqua <br>Bloom Type: HT <br>Coordinates: (42.156238, -79.393483)","Chautauqua Lake <br>County: Chautauqua <br>Bloom Type: HT <br>Coordinates: (42.156238, -79.393483)","Chautauqua Lake <br>County: Chautauqua <br>Bloom Type: HT <br>Coordinates: (42.156238, -79.393483)","Chautauqua Lake <br>County: Chautauqua <br>Bloom Type: HT <br>Coordinates: (42.156238, -79.393483)","Chautauqua Lake <br>County: Chautauqua <br>Bloom Type: HT <br>Coordinates: (42.156238, -79.393483)","Chenango Lake <br>County: Chenango <br>Bloom Type: C <br>Coordinates: (42.5825996, -75.4412003)","Chestnut Ridge Pond <br>County: Sullivan <br>Bloom Type: S <br>Coordinates: (41.08419, -74.06221)","China Pond <br>County: Putnam <br>Bloom Type: C <br>Coordinates: (41.4418983, -73.7434998)","Chodikee Lake <br>County: Ulster <br>Bloom Type: C <br>Coordinates: (41.7727013, -73.9838028)","Chodikee Lake <br>County: Ulster <br>Bloom Type: S <br>Coordinates: (41.7727013, -73.9838028)","Chodikee Lake <br>County: Ulster <br>Bloom Type: S <br>Coordinates: (41.7727013, -73.9838028)","Clove Lake <br>County: Richmond <br>Bloom Type: HT <br>Coordinates: (40.6167984, -74.1075974)","Clove Lake <br>County: Richmond <br>Bloom Type: HT <br>Coordinates: (40.6167984, -74.1075974)","Clove Lake <br>County: Richmond <br>Bloom Type: C <br>Coordinates: (40.6167984, -74.1075974)","Clove Lake <br>County: Richmond <br>Bloom Type: S <br>Coordinates: (40.6167984, -74.1075974)","Conesus Creek <br>County: Livingston <br>Bloom Type: S <br>Coordinates: (42.834736, -77.704561)","Conesus Creek <br>County: Livingston <br>Bloom Type: S <br>Coordinates: (42.834736, -77.704561)","Conesus Lake <br>County: Livingston <br>Bloom Type: C <br>Coordinates: (42.7522011, -77.7186966)","Conesus Lake <br>County: Livingston <br>Bloom Type: C <br>Coordinates: (42.7522011, -77.7186966)","Conesus Lake <br>County: Livingston <br>Bloom Type: C <br>Coordinates: (42.7522011, -77.7186966)","Conesus Lake <br>County: Livingston <br>Bloom Type: S <br>Coordinates: (42.7522011, -77.7186966)","Congers Lake <br>County: Rockland <br>Bloom Type: HT <br>Coordinates: (41.1427994, -73.9396973)","Coopers Neck Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.8675995, -72.4021988)","Coopers Neck Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.8675995, -72.4021988)","Copake Lake <br>County: Columbia <br>Bloom Type: C <br>Coordinates: (42.144001, -73.5954971)","Copake Lake <br>County: Columbia <br>Bloom Type: S <br>Coordinates: (42.144001, -73.5954971)","Cortlandt Lake <br>County: Westchester <br>Bloom Type: S <br>Coordinates: (42.144001, -73.5954971)","Cossayuna Lake <br>County: Washington <br>Bloom Type: C <br>Coordinates: (43.2005997, -73.4234009)","Cossayuna Lake <br>County: Washington <br>Bloom Type: S <br>Coordinates: (43.2005997, -73.4234009)","Cossayuna Lake <br>County: Washington <br>Bloom Type: C <br>Coordinates: (43.2005997, -73.4234009)","Cossayuna Lake <br>County: Washington <br>Bloom Type: C <br>Coordinates: (43.2005997, -73.4234009)","Cossayuna Lake <br>County: Washington <br>Bloom Type: HT <br>Coordinates: (43.2005997, -73.4234009)","Coxsackie Reservoir <br>County: Greene <br>Bloom Type: C <br>Coordinates: (42.4076004, -73.8778)","Craine Lake <br>County: Madison <br>Bloom Type: HT <br>Coordinates: (42.76085, -75.55753)","Craine Lake <br>County: Madison <br>Bloom Type: HT <br>Coordinates: (42.76085, -75.55753)","Craine Lake <br>County: Madison <br>Bloom Type: HT <br>Coordinates: (42.76085, -75.55753)","Craine Lake <br>County: Madison <br>Bloom Type: HT <br>Coordinates: (42.76085, -75.55753)","Craine Lake <br>County: Madison <br>Bloom Type: HT <br>Coordinates: (42.76085, -75.55753)","Craine Lake <br>County: Madison <br>Bloom Type: HT <br>Coordinates: (42.76085, -75.55753)","Craine Lake <br>County: Madison <br>Bloom Type: HT <br>Coordinates: (42.76085, -75.55753)","Cranberry Pond <br>County: Monroe <br>Bloom Type: HT <br>Coordinates: (43.300499, -77.6973038)","Croton Falls Reservoir <br>County: Putnam <br>Bloom Type: S <br>Coordinates: (41.3781013, -73.6547012)","Croton Falls Reservoir <br>County: Putnam <br>Bloom Type: S <br>Coordinates: (41.3781013, -73.6547012)","Croton Falls Reservoir <br>County: Putnam <br>Bloom Type: S <br>Coordinates: (41.3781013, -73.6547012)","Cuba Lake <br>County: Allegany <br>Bloom Type: C <br>Coordinates: (42.2533989, -78.2928009)","Dead Lake <br>County: Washington <br>Bloom Type: S <br>Coordinates: (42.8106995, -75.8886032)","Dean Pond <br>County: Cortland <br>Bloom Type: C <br>Coordinates: (42.4477005, -76.0034027)","Dean Pond <br>County: Cortland <br>Bloom Type: HT <br>Coordinates: (42.4477005, -76.0034027)","Dean Pond <br>County: Cortland <br>Bloom Type: HT <br>Coordinates: (42.4477005, -76.0034027)","Dean Pond <br>County: Cortland <br>Bloom Type: HT <br>Coordinates: (42.4477005, -76.0034027)","Dean Pond <br>County: Cortland <br>Bloom Type: HT <br>Coordinates: (42.4477005, -76.0034027)","Deans Pond <br>County: Cortland <br>Bloom Type: HT <br>Coordinates: (42.4477005, -76.0034027)","Deep Pond <br>County: Suffolk <br>Bloom Type: HT <br>Coordinates: (40.936537, -72.831295)","Deer Lake <br>County: Dutchess <br>Bloom Type: S <br>Coordinates: (41.9011, -75.032318)","Delaware Park Lake <br>County: Erie <br>Bloom Type: C <br>Coordinates: (42.9329987, -78.8703003)","Delta Lake <br>County: Oneida <br>Bloom Type: S <br>Coordinates: (43.29321, -75.47231)","De Ruyter Reservoir <br>County: Onondaga <br>Bloom Type: C <br>Coordinates: (42.8106995, -75.8886032)","De Ruyter Reservoir <br>County: Madison <br>Bloom Type: C <br>Coordinates: (42.8106995, -75.8886032)","Diverting Reservoir <br>County: Putnam <br>Bloom Type: S <br>Coordinates: (42.53676, -77.30129)","Division Pond <br>County: Suffolk <br>Bloom Type: S <br>Coordinates: (40.8852005, -72.5659027)","Dryden Lake <br>County: Tompkins <br>Bloom Type: S <br>Coordinates: (42.4620018, -76.2725983)","Dryden Lake <br>County: Tompkins <br>Bloom Type: C <br>Coordinates: (42.4620018, -76.2725983)","Dryden Lake <br>County: Tompkins <br>Bloom Type: HT <br>Coordinates: (42.4620018, -76.2725983)","Duane Lake <br>County: Schenectady <br>Bloom Type: C <br>Coordinates: (42.7490997, -74.1126022)","Duane Lake <br>County: Schenectady <br>Bloom Type: C <br>Coordinates: (42.7490997, -74.1126022)","Duane Lake <br>County: Schenectady <br>Bloom Type: S <br>Coordinates: (42.7490997, -74.1126022)","Duane Lake <br>County: Schenectady <br>Bloom Type: C <br>Coordinates: (42.7490997, -74.1126022)","Durand Lake <br>County: Monroe <br>Bloom Type: HT <br>Coordinates: (43.2332993, -77.5576019)","Dutch Hollow Brook <br>County: Cayuga <br>Bloom Type: S <br>Coordinates: (42.861907, -76.511026)","Eagle Pond <br>County: Franklin <br>Bloom Type: C <br>Coordinates: (44.6689987, -74.2738037)","Eagle Pond <br>County: Franklin <br>Bloom Type: C <br>Coordinates: (44.6689987, -74.2738037)","Eagle Pond <br>County: Franklin <br>Bloom Type: C <br>Coordinates: (44.6689987, -74.2738037)","Eagle Pond <br>County: Franklin <br>Bloom Type: S <br>Coordinates: (44.6689987, -74.2738037)","East Branch Hackensack River <br>County: Rockland <br>Bloom Type: S <br>Coordinates: (41.121117, -73.960648)","East Branch Hackensack River <br>County: Rockland <br>Bloom Type: S <br>Coordinates: (41.121117, -73.960648)","East Branch Hackensack River <br>County: Rockland <br>Bloom Type: S <br>Coordinates: (41.121117, -73.960648)","East Caroga Lake <br>County: Fulton <br>Bloom Type: C <br>Coordinates: (43.1278, -74.4800034)","East Caroga Lake <br>County: Fulton <br>Bloom Type: C <br>Coordinates: (43.1278, -74.4800034)","East Sidney Lake <br>County: Delaware <br>Bloom Type: S <br>Coordinates: (42.3275986, -75.2145004)","Echo Lake <br>County: Chenango <br>Bloom Type: C <br>Coordinates: (42.3862991, -75.8507004)","Eighth Lake <br>County: Hamilton <br>Bloom Type: C <br>Coordinates: (43.7789993, -74.7024002)","Ellis Pond <br>County: Dutchess <br>Bloom Type: S <br>Coordinates: (41.6825981, -73.5470963)","Engleville Pond <br>County: Schoharie <br>Bloom Type: C <br>Coordinates: (42.757, -74.652298)","Esopus Creek <br>County: Ulster <br>Bloom Type: S <br>Coordinates: (41.995246, -73.997576)","Evens Lake <br>County: Sullivan <br>Bloom Type: C <br>Coordinates: (41.765001, -74.652425)","Evens Lake <br>County: Sullivan <br>Bloom Type: HT <br>Coordinates: (41.765001, -74.652425)","Evens Lake <br>County: Sullivan <br>Bloom Type: HT <br>Coordinates: (41.765001, -74.652425)","Evens Lake <br>County: Sullivan <br>Bloom Type: HT <br>Coordinates: (41.765001, -74.652425)","Fieldston's Indian Lake (aka: Indian Pond in Crotona Park) <br>County: Bronx <br>Bloom Type: C <br>Coordinates: (40.8382988, -73.8940964)","Fieldston's Indian Lake (aka: Indian Pond in Crotona Park) <br>County: Bronx <br>Bloom Type: HT <br>Coordinates: (40.8382988, -73.8940964)","Fieldston's Indian Lake (aka: Indian Pond in Crotona Park) <br>County: Bronx <br>Bloom Type: C <br>Coordinates: (40.8382988, -73.8940964)","Findley Lake <br>County: Chautauqua <br>Bloom Type: HT <br>Coordinates: (42.1018982, -79.7261963)","Findley Lake <br>County: Chautauqua <br>Bloom Type: C <br>Coordinates: (42.1018982, -79.7261963)","Findley Lake <br>County: Chautauqua <br>Bloom Type: C <br>Coordinates: (42.1018982, -79.7261963)","Findley Lake <br>County: Chautauqua <br>Bloom Type: HT <br>Coordinates: (42.1018982, -79.7261963)","Findley Lake <br>County: Chautauqua <br>Bloom Type: HT <br>Coordinates: (42.1018982, -79.7261963)","Forest Lake <br>County: Niagara <br>Bloom Type: C <br>Coordinates: (43.064198, -78.826684)","Fort Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (41.0416985, -71.9532013)","Fort Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (41.0416985, -71.9532013)","Fort Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (41.0416985, -71.9532013)","Four Corners Pond <br>County: Orange <br>Bloom Type: C <br>Coordinates: (41.2224998, -74.2223969)","Fox Lake <br>County: Sullivan <br>Bloom Type: C <br>Coordinates: (41.5918007, -74.9380035)","Franklin Falls Pond <br>County: Franklin <br>Bloom Type: S <br>Coordinates: (44.47488, -74.500328)","Franklin Falls Pond <br>County: Essex <br>Bloom Type: S <br>Coordinates: (44.47488, -74.500328)","Fresh Pond (Hither Hills SP) <br>County: Suffolk <br>Bloom Type: S <br>Coordinates: (41.0158997, -72.024498)","Fresh Pond (Shelter Island) <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (41.057541, -72.335788)","Fresh Pond (Shelter Island) <br>County: Suffolk <br>Bloom Type: S <br>Coordinates: (41.057541, -72.335788)","Fresh Pond (Shelter Island) <br>County: Suffolk <br>Bloom Type: S <br>Coordinates: (41.057541, -72.335788)","Friends Lake <br>County: Warren <br>Bloom Type: C <br>Coordinates: (43.6259003, -73.8440018)","Georgica Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9390984, -72.2291031)","Georgica Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9390984, -72.2291031)","Georgica Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9390984, -72.2291031)","Georgica Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9390984, -72.2291031)","Georgica Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9390984, -72.2291031)","Georgica Pond <br>County: Suffolk <br>Bloom Type: S <br>Coordinates: (40.9390984, -72.2291031)","Gilbert Lake <br>County: Otsego <br>Bloom Type: S <br>Coordinates: (42.5800018, -75.1283035)","Gilbert Lake <br>County: Otsego <br>Bloom Type: S <br>Coordinates: (42.5800018, -75.1283035)","Gilbert Lake <br>County: Otsego <br>Bloom Type: C <br>Coordinates: (42.5800018, -75.1283035)","Glen Lake <br>County: Warren <br>Bloom Type: C <br>Coordinates: (43.3636017, -73.6732025)","Glenn Lake <br>County: Chenango <br>Bloom Type: S <br>Coordinates: (42.480492, -75.492493)","Glenwood Lake <br>County: Orleans <br>Bloom Type: S <br>Coordinates: (41.53344, -74.04531)","Golden Pond <br>County: Queens <br>Bloom Type: C <br>Coordinates: (40.7710991, -73.7649002)","Golden Pond <br>County: Queens <br>Bloom Type: C <br>Coordinates: (40.7710991, -73.7649002)","Golden Pond <br>County: Queens <br>Bloom Type: HT <br>Coordinates: (40.7710991, -73.7649002)","Golden Pond <br>County: Queens <br>Bloom Type: S <br>Coordinates: (40.7710991, -73.7649002)","Goodhue Lake <br>County: Steuben <br>Bloom Type: S <br>Coordinates: (42.1823997, -77.2708969)","Goodliffe Pond <br>County: Westchester <br>Bloom Type: S <br>Coordinates: (40.950901, -73.7714005)","Goose Pond <br>County: Queens <br>Bloom Type: HT <br>Coordinates: (40.7118988, -73.7986984)","Goose Pond <br>County: Queens <br>Bloom Type: HT <br>Coordinates: (40.7118988, -73.7986984)","Goose Pond <br>County: Queens <br>Bloom Type: HT <br>Coordinates: (40.7118988, -73.7986984)","Grass Lake <br>County: Jefferson <br>Bloom Type: C <br>Coordinates: (44.3400002, -75.7152023)","Grass Lake <br>County: St Lawrence <br>Bloom Type: C <br>Coordinates: (44.3400002, -75.7152023)","Grass Lake <br>County: St Lawrence <br>Bloom Type: C <br>Coordinates: (44.3400002, -75.7152023)","Grass Lake <br>County: Jefferson <br>Bloom Type: C <br>Coordinates: (44.3400002, -75.7152023)","Grass Lake <br>County: St Lawrence <br>Bloom Type: C <br>Coordinates: (44.3400002, -75.7152023)","Grassy Sprain Reservoir <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (40.9780998, -73.8475037)","Guilford Lake <br>County: Chenango <br>Bloom Type: C <br>Coordinates: (42.412899, -75.4993973)","Hadlock Pond <br>County: Washington <br>Bloom Type: C <br>Coordinates: (43.4236984, -73.5719986)","Halsey Pond <br>County: Westchester <br>Bloom Type: S <br>Coordinates: (41.0290985, -73.8576965)","Harlem Meer <br>County: New York <br>Bloom Type: HT <br>Coordinates: (40.7961006, -73.9512024)","Harlem Meer <br>County: New York <br>Bloom Type: C <br>Coordinates: (40.7961006, -73.9512024)","Harlem Meer <br>County: New York <br>Bloom Type: HT <br>Coordinates: (40.7961006, -73.9512024)","Harlem Meer <br>County: New York <br>Bloom Type: HT <br>Coordinates: (40.7961006, -73.9512024)","Harlem Meer <br>County: New York <br>Bloom Type: HT <br>Coordinates: (40.7961006, -73.9512024)","Hatch Lake <br>County: Madison <br>Bloom Type: C <br>Coordinates: (42.8345985, -75.677803)","Hatch Lake <br>County: Madison <br>Bloom Type: C <br>Coordinates: (42.8345985, -75.677803)","Hatch Lake <br>County: Madison <br>Bloom Type: C <br>Coordinates: (42.8345985, -75.677803)","Hessian Lake <br>County: Orange <br>Bloom Type: S <br>Coordinates: (41.3153992, -73.9913025)","Hessian Lake <br>County: Rockland <br>Bloom Type: S <br>Coordinates: (41.3153992, -73.9913025)","Hiawatha Lake <br>County: Onondaga <br>Bloom Type: C <br>Coordinates: (43.0257988, -76.1687012)","Hiawatha Lake <br>County: Onondaga <br>Bloom Type: HT <br>Coordinates: (43.0257988, -76.1687012)","Hiawatha Lake <br>County: Onondaga <br>Bloom Type: C <br>Coordinates: (43.0257988, -76.1687012)","Hollister Lake <br>County: Greene <br>Bloom Type: C <br>Coordinates: (42.3095016, -73.8844986)","Honeoye Lake <br>County: Ontario <br>Bloom Type: C <br>Coordinates: (42.7542, -77.5115967)","Honeoye Lake <br>County: Ontario <br>Bloom Type: C <br>Coordinates: (42.7542, -77.5115967)","Honeoye Lake <br>County: Ontario <br>Bloom Type: C <br>Coordinates: (42.7542, -77.5115967)","Honeoye Lake <br>County: Ontario <br>Bloom Type: C <br>Coordinates: (42.7542, -77.5115967)","Honeoye Lake <br>County: Ontario <br>Bloom Type: HT <br>Coordinates: (42.7542, -77.5115967)","Honeoye Lake <br>County: Ontario <br>Bloom Type: HT <br>Coordinates: (42.7542, -77.5115967)","Honeoye Lake <br>County: Ontario <br>Bloom Type: S <br>Coordinates: (42.7542, -77.5115967)","Hook Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9478989, -72.1900024)","Hook Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9478989, -72.1900024)","Hyde Lake <br>County: Jefferson <br>Bloom Type: S <br>Coordinates: (44.2435989, -75.8331985)","Hyde Lake <br>County: Jefferson <br>Bloom Type: S <br>Coordinates: (44.2435989, -75.8331985)","Hyden Park Lake <br>County: Niagara <br>Bloom Type: C <br>Coordinates: (43.100662, -79.022324)","Hyde Park Lake <br>County: Niagara <br>Bloom Type: C <br>Coordinates: (43.100662, -79.022324)","Indian Lake <br>County: Putnam <br>Bloom Type: C <br>Coordinates: (41.3731003, -73.8877029)","Indian Lake <br>County: Bronx <br>Bloom Type: C <br>Coordinates: (41.3731003, -73.8877029)","Indian Lake <br>County: Putnam <br>Bloom Type: C <br>Coordinates: (41.3731003, -73.8877029)","Iroquois Lake <br>County: Schenectady <br>Bloom Type: C <br>Coordinates: (42.801067, -73.911808)","Iroquois Lake <br>County: Schenectady <br>Bloom Type: S <br>Coordinates: (42.801067, -73.911808)","Jamesville Reservoir <br>County: Onondaga <br>Bloom Type: C <br>Coordinates: (42.973999, -76.0690994)","Jamesville Reservoir <br>County: Onondaga <br>Bloom Type: C <br>Coordinates: (42.973999, -76.0690994)","Java Lake <br>County: Wyoming <br>Bloom Type: HT <br>Coordinates: (42.6313019, -78.3439026)","Java Lake <br>County: Wyoming <br>Bloom Type: HT <br>Coordinates: (42.6313019, -78.3439026)","Java Lake <br>County: Wyoming <br>Bloom Type: C <br>Coordinates: (42.6313019, -78.3439026)","Java Lake <br>County: Wyoming <br>Bloom Type: HT <br>Coordinates: (42.6313019, -78.3439026)","Java Lake <br>County: Wyoming <br>Bloom Type: HT <br>Coordinates: (42.6313019, -78.3439026)","Java Lake <br>County: Wyoming <br>Bloom Type: C <br>Coordinates: (42.6313019, -78.3439026)","Kellis Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9272003, -72.3174973)","Kellis Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9272003, -72.3174973)","Kellis Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9272003, -72.3174973)","Keuka Lake <br>County: Steuben <br>Bloom Type: HT <br>Coordinates: (42.4934006, -77.1395035)","Keuka Lake <br>County: Yates <br>Bloom Type: HT <br>Coordinates: (42.4934006, -77.1395035)","Keuka Lake <br>County: Yates <br>Bloom Type: HT <br>Coordinates: (42.4934006, -77.1395035)","Keuka Lake <br>County: Steuben <br>Bloom Type: HT <br>Coordinates: (42.4934006, -77.1395035)","Kiamesha Lake <br>County: Sullivan <br>Bloom Type: C <br>Coordinates: (41.676899, -74.6663971)","Kinderhook Lake <br>County: Columbia <br>Bloom Type: C <br>Coordinates: (42.34812, -73.66359)","Kings Point Pond <br>County: Nassau <br>Bloom Type: C <br>Coordinates: (40.83061, -73.75195)","Kirk Lake <br>County: Putnam <br>Bloom Type: C <br>Coordinates: (41.385601, -73.7498016)","Kirk Lake <br>County: Putnam <br>Bloom Type: C <br>Coordinates: (41.385601, -73.7498016)","Kirk Lake <br>County: Putnam <br>Bloom Type: C <br>Coordinates: (41.385601, -73.7498016)","Kirk Lake <br>County: Putnam <br>Bloom Type: C <br>Coordinates: (41.385601, -73.7498016)","Kirk Lake <br>County: Putnam <br>Bloom Type: HT <br>Coordinates: (41.385601, -73.7498016)","Kirk Lake <br>County: Putnam <br>Bloom Type: C <br>Coordinates: (41.385601, -73.7498016)","Kissena Lake <br>County: Queens <br>Bloom Type: C <br>Coordinates: (40.7481003, -73.8054962)","Kissena Lake <br>County: Queens <br>Bloom Type: HT <br>Coordinates: (40.7481003, -73.8054962)","Kissena Lake <br>County: Queens <br>Bloom Type: C <br>Coordinates: (40.7481003, -73.8054962)","Kissena Lake <br>County: Queens <br>Bloom Type: HT <br>Coordinates: (40.7481003, -73.8054962)","Kissena Lake <br>County: Queens <br>Bloom Type: HT <br>Coordinates: (40.7481003, -73.8054962)","Kissena Lake <br>County: Queens <br>Bloom Type: S <br>Coordinates: (40.7481003, -73.8054962)","Kyser Lake <br>County: Herkimer <br>Bloom Type: S <br>Coordinates: (43.0681992, -74.7705002)","Kyser Lake <br>County: Fulton <br>Bloom Type: S <br>Coordinates: (43.0681992, -74.7705002)","Lake Anawanda <br>County: Sullivan <br>Bloom Type: C <br>Coordinates: (41.8574982, -74.9628983)","Lake Boyce <br>County: Rockland <br>Bloom Type: S <br>Coordinates: (41.2475014, -74.0034027)","Lake Capri <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.696701, -73.3007965)","Lake Carmel <br>County: Putnam <br>Bloom Type: C <br>Coordinates: (41.4584999, -73.6650009)","Lake Carmel <br>County: Putnam <br>Bloom Type: C <br>Coordinates: (41.4584999, -73.6650009)","Lake Carmel <br>County: Putnam <br>Bloom Type: C <br>Coordinates: (41.4584999, -73.6650009)","Lake Carmel <br>County: Putnam <br>Bloom Type: S <br>Coordinates: (41.4584999, -73.6650009)","Lake Casse <br>County: Putnam <br>Bloom Type: C <br>Coordinates: (41.3862991, -73.7099991)","Lake Casse <br>County: Putnam <br>Bloom Type: S <br>Coordinates: (41.3862991, -73.7099991)","Lake Casse <br>County: Putnam <br>Bloom Type: S <br>Coordinates: (41.3862991, -73.7099991)","Lake Champlain <br>County: Essex <br>Bloom Type: S <br>Coordinates: (44.5694008, -73.1817017)","Lake Champlain <br>County: Washington <br>Bloom Type: S <br>Coordinates: (44.5694008, -73.1817017)","Lake Champlain <br>County: Clinton <br>Bloom Type: S <br>Coordinates: (44.5694008, -73.1817017)","Lake Como <br>County: Cayuga <br>Bloom Type: HT <br>Coordinates: (42.6772003, -76.3024979)","Lake Como <br>County: Cayuga <br>Bloom Type: C <br>Coordinates: (42.6772003, -76.3024979)","Lake Eaton <br>County: Hamilton <br>Bloom Type: S <br>Coordinates: (43.9789009, -74.4664001)","Lake Huntington <br>County: Sullivan <br>Bloom Type: S <br>Coordinates: (41.6828995, -74.9904022)","Lake Huntington <br>County: Sullivan <br>Bloom Type: S <br>Coordinates: (41.6828995, -74.9904022)","Lake Huntington <br>County: Sullivan <br>Bloom Type: C <br>Coordinates: (41.6828995, -74.9904022)","Lake Katonah <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.2853012, -73.6549988)","Lake Katonah <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.2853012, -73.6549988)","Lake Katonah <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.2853012, -73.6549988)","Lake Katonah <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.2853012, -73.6549988)","Lake Lacoma <br>County: Monroe <br>Bloom Type: C <br>Coordinates: (43.0508995, -77.4794006)","Lake Lacoma <br>County: Monroe <br>Bloom Type: C <br>Coordinates: (43.0508995, -77.4794006)","Lake Lacoma <br>County: Monroe <br>Bloom Type: S <br>Coordinates: (43.0508995, -77.4794006)","Lake Lincolndale <br>County: Westchester <br>Bloom Type: HT <br>Coordinates: (41.3419991, -73.7254028)","Lake Lincolndale <br>County: Westchester <br>Bloom Type: HT <br>Coordinates: (41.3419991, -73.7254028)","Lake Lincolndale <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.3419991, -73.7254028)","Lake Lincolndale <br>County: Westchester <br>Bloom Type: HT <br>Coordinates: (41.3419991, -73.7254028)","Lake Lincolndale <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.3419991, -73.7254028)","Lake Lucille <br>County: Rockland <br>Bloom Type: C <br>Coordinates: (41.1837006, -73.9978027)","Lake Lucille <br>County: Rockland <br>Bloom Type: C <br>Coordinates: (41.1837006, -73.9978027)","Lake Lucille <br>County: Rockland <br>Bloom Type: C <br>Coordinates: (41.1837006, -73.9978027)","Lake Mahopac <br>County: Putnam <br>Bloom Type: S <br>Coordinates: (41.35558, -73.7784)","Lake Mohegan <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.3139992, -73.8488007)","Lake Mohegan <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.3139992, -73.8488007)","Lake Mohegan <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.3139992, -73.8488007)","Lake Mohegan <br>County: Westchester <br>Bloom Type: HT <br>Coordinates: (41.3139992, -73.8488007)","Lake Mohegan <br>County: Westchester <br>Bloom Type: HT <br>Coordinates: (41.3139992, -73.8488007)","Lake Mohegan <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.3139992, -73.8488007)","Lake Moraine <br>County: Madison <br>Bloom Type: C <br>Coordinates: (42.8502007, -75.5222015)","Lake Moraine <br>County: Madison <br>Bloom Type: C <br>Coordinates: (42.8502007, -75.5222015)","Lake Moraine <br>County: Madison <br>Bloom Type: HT <br>Coordinates: (42.8502007, -75.5222015)","Lake Moraine <br>County: Madison <br>Bloom Type: C <br>Coordinates: (42.8502007, -75.5222015)","Lake Neatahwanta <br>County: Oswego <br>Bloom Type: HT <br>Coordinates: (43.3081017, -76.4372025)","Lake Neatahwanta <br>County: Oswego <br>Bloom Type: HT <br>Coordinates: (43.3081017, -76.4372025)","Lake Neatahwanta <br>County: Oswego <br>Bloom Type: HT <br>Coordinates: (43.3081017, -76.4372025)","Lake Neatahwanta <br>County: Oswego <br>Bloom Type: HT <br>Coordinates: (43.3081017, -76.4372025)","Lake Neatahwanta <br>County: Oswego <br>Bloom Type: C <br>Coordinates: (43.3081017, -76.4372025)","Lake Neatahwanta <br>County: Oswego <br>Bloom Type: S <br>Coordinates: (43.3081017, -76.4372025)","Lake Of The Woods <br>County: Jefferson <br>Bloom Type: C <br>Coordinates: (44.3153992, -75.7277985)","Lake Oniad <br>County: Dutchess <br>Bloom Type: S <br>Coordinates: (41.58874, -73.87979)","Lake Ontario <br>County: Jefferson <br>Bloom Type: S <br>Coordinates: (43.914122, -76.123662)","Lake Ontario <br>County: Oswego <br>Bloom Type: S <br>Coordinates: (43.914122, -76.123662)","Lake Ontario <br>County: Cayuga <br>Bloom Type: S <br>Coordinates: (43.914122, -76.123662)","Lake Ontario <br>County: Oswego <br>Bloom Type: S <br>Coordinates: (43.914122, -76.123662)","Lake Ontario <br>County: Orleans <br>Bloom Type: S <br>Coordinates: (43.914122, -76.123662)","Lake Ontario <br>County: Wayne <br>Bloom Type: S <br>Coordinates: (43.914122, -76.123662)","Lake Ontario <br>County: Monroe <br>Bloom Type: S <br>Coordinates: (43.914122, -76.123662)","Lake Ontario <br>County: Monroe <br>Bloom Type: S <br>Coordinates: (43.914122, -76.123662)","Lake Ontario <br>County: Niagara <br>Bloom Type: S <br>Coordinates: (43.914122, -76.123662)","Lake Ontario <br>County: Oswego <br>Bloom Type: S <br>Coordinates: (43.914122, -76.123662)","Lake Ontario <br>County: St Lawrence <br>Bloom Type: S <br>Coordinates: (43.914122, -76.123662)","Lake Ontario <br>County: Wayne <br>Bloom Type: S <br>Coordinates: (43.914122, -76.123662)","Lake Ontario <br>County: Orleans <br>Bloom Type: S <br>Coordinates: (43.914122, -76.123662)","Lake Ontario <br>County: Franklin <br>Bloom Type: S <br>Coordinates: (43.914122, -76.123662)","Lake Ontario <br>County: Jefferson <br>Bloom Type: S <br>Coordinates: (43.914122, -76.123662)","Lake Ontario <br>County: Cayuga <br>Bloom Type: S <br>Coordinates: (43.914122, -76.123662)","Lake Ontario <br>County: Orleans <br>Bloom Type: S <br>Coordinates: (43.914122, -76.123662)","Lake Ontario (Sackett) <br>County: Jefferson <br>Bloom Type: S <br>Coordinates: (43.914122, -76.123662)","Lake Ontario (Westcott) <br>County: Jefferson <br>Bloom Type: S <br>Coordinates: (43.914122, -76.123662)","Lake Oscaleta <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.2965012, -73.5614014)","Lake Oscaleta <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.2965012, -73.5614014)","Lake Peekskill <br>County: Putnam <br>Bloom Type: HT <br>Coordinates: (41.3395004, -73.8827972)","Lake Peekskill <br>County: Putnam <br>Bloom Type: C <br>Coordinates: (41.3395004, -73.8827972)","Lake Peekskill <br>County: Putnam <br>Bloom Type: C <br>Coordinates: (41.3395004, -73.8827972)","Lake Peekskill <br>County: Putnam <br>Bloom Type: HT <br>Coordinates: (41.3395004, -73.8827972)","Lake Placid <br>County: Essex <br>Bloom Type: HT <br>Coordinates: (44.3251991, -73.959198)","Lake Pleasant <br>County: Hamilton <br>Bloom Type: S <br>Coordinates: (43.4872017, -74.3638)","Lake Rippowam <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.3000984, -73.5627975)","Lake Rippowam <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.3000984, -73.5627975)","Lake Ronkonkoma <br>County: Suffolk <br>Bloom Type: HT <br>Coordinates: (40.821991, -73.11927)","Lake Ronkonkoma <br>County: Suffolk <br>Bloom Type: HT <br>Coordinates: (40.821991, -73.11927)","Lake Ronkonkoma <br>County: Suffolk <br>Bloom Type: HT <br>Coordinates: (40.821991, -73.11927)","Lake Ronkonkoma <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.821991, -73.11927)","Lake Ronkonkoma <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.821991, -73.11927)","Lake Ronkonkoma <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.821991, -73.11927)","Lake Sunnyside <br>County: Warren <br>Bloom Type: C <br>Coordinates: (43.3753014, -73.6397018)","Lake Temalo <br>County: Oswego <br>Bloom Type: C <br>Coordinates: (43.2840004, -76.2594986)","Lake Tiorati <br>County: Orange <br>Bloom Type: S <br>Coordinates: (41.2616997, -74.0878983)","Lake Tonetta <br>County: Putnam <br>Bloom Type: S <br>Coordinates: (41.4216995, -73.6109009)","Lake Waccabuc <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.297699, -73.5840988)","Lake Waccabuc <br>County: Westchester <br>Bloom Type: HT <br>Coordinates: (41.297699, -73.5840988)","Lake Waccabuc <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.297699, -73.5840988)","Lake Waccabuc <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.297699, -73.5840988)","Lake Waccabuc <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.297699, -73.5840988)","Lamoka Lake <br>County: Schuyler <br>Bloom Type: S <br>Coordinates: (42.4057999, -77.0777969)","Lamoka Lake <br>County: Schuyler <br>Bloom Type: S <br>Coordinates: (42.4057999, -77.0777969)","Lamoka Lake Chanel <br>County: Schuyler <br>Bloom Type: S <br>Coordinates: (42.418768, -77.089605)","Lamoka Lake Channel <br>County: Schuyler <br>Bloom Type: S <br>Coordinates: (42.418768, -77.089605)","Laurel Lake <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9789009, -72.5575027)","Laurel Lake <br>County: Broome <br>Bloom Type: C <br>Coordinates: (42.0103989, -75.4803009)","Laurel Lake <br>County: Broome <br>Bloom Type: C <br>Coordinates: (42.0103989, -75.4803009)","Laurel Lake <br>County: Broome <br>Bloom Type: HT <br>Coordinates: (42.0103989, -75.4803009)","Laurel Lake <br>County: Broome <br>Bloom Type: C <br>Coordinates: (42.0103989, -75.4803009)","Laurel Lake <br>County: Broome <br>Bloom Type: C <br>Coordinates: (42.0103989, -75.4803009)","Lawson Lake <br>County: Albany <br>Bloom Type: C <br>Coordinates: (42.5391006, -73.9598999)","Lawson Lake <br>County: Albany <br>Bloom Type: C <br>Coordinates: (42.5391006, -73.9598999)","Lawson Lake <br>County: Albany <br>Bloom Type: C <br>Coordinates: (42.5391006, -73.9598999)","Lawson Lake <br>County: Albany <br>Bloom Type: HT <br>Coordinates: (42.5391006, -73.9598999)","Lawson Lake <br>County: Albany <br>Bloom Type: HT <br>Coordinates: (42.5391006, -73.9598999)","Lawson Lake <br>County: Albany <br>Bloom Type: HT <br>Coordinates: (42.5391006, -73.9598999)","Lebanon Reservoir <br>County: Madison <br>Bloom Type: S <br>Coordinates: (42.80634, -75.61002)","Lime Lake <br>County: Cattaraugus <br>Bloom Type: HT <br>Coordinates: (42.4273987, -78.4792023)","Lime Lake <br>County: Cattaraugus <br>Bloom Type: HT <br>Coordinates: (42.4273987, -78.4792023)","Lime Lake <br>County: Cattaraugus <br>Bloom Type: C <br>Coordinates: (42.4273987, -78.4792023)","Lime Lake <br>County: Cattaraugus <br>Bloom Type: HT <br>Coordinates: (42.4273987, -78.4792023)","Little Fresh Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9182014, -72.4085007)","Little Fresh Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9182014, -72.4085007)","Little Pond <br>County: Delaware <br>Bloom Type: S <br>Coordinates: (42.0397987, -74.7472)","Little We Wah Lake <br>County: Orange <br>Bloom Type: C <br>Coordinates: (41.21171, -74.19939)","Little We Wah Lake <br>County: Orange <br>Bloom Type: C <br>Coordinates: (41.21171, -74.19939)","Little We Wah Lake <br>County: Orange <br>Bloom Type: C <br>Coordinates: (41.21171, -74.19939)","Little We Wah Lake <br>County: Orange <br>Bloom Type: C <br>Coordinates: (41.21171, -74.19939)","Long Pond <br>County: Dutchess <br>Bloom Type: S <br>Coordinates: (42.792099, -73.4386978)","Long Pond <br>County: Chenango <br>Bloom Type: S <br>Coordinates: (42.42023, -75.84813)","Long Pond <br>County: Rensselaer <br>Bloom Type: S <br>Coordinates: (42.792099, -73.4386978)","Looking Glass Pond <br>County: Schoharie <br>Bloom Type: C <br>Coordinates: (42.5499992, -74.4929962)","Loon Lake <br>County: Warren <br>Bloom Type: C <br>Coordinates: (43.6670691, -73.8478694)","Loon Lake <br>County: Warren <br>Bloom Type: C <br>Coordinates: (43.6670691, -73.8478694)","Lorton Lake <br>County: Oswego <br>Bloom Type: HT <br>Coordinates: (43.503741, -75.89079)","Lounsbury Pond <br>County: Westchester <br>Bloom Type: S <br>Coordinates: (41.270401, -73.9229965)","Mallet Pond <br>County: Schoharie <br>Bloom Type: C <br>Coordinates: (42.586096, -74.5213227)","Maratooka Lake <br>County: Suffolk <br>Bloom Type: HT <br>Coordinates: (40.991885, -72.523684)","Maratooka Lake <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.991885, -72.523684)","Maratooka Lake <br>County: Suffolk <br>Bloom Type: HT <br>Coordinates: (40.991885, -72.523684)","Maratooka Lake <br>County: Suffolk <br>Bloom Type: HT <br>Coordinates: (40.991885, -72.523684)","Maratooka Lake <br>County: Suffolk <br>Bloom Type: HT <br>Coordinates: (40.991885, -72.523684)","Maratooka Lake <br>County: Suffolk <br>Bloom Type: HT <br>Coordinates: (40.991885, -72.523684)","Marcy Street Pond <br>County: Onondaga <br>Bloom Type: C <br>Coordinates: (43.06608, -76.08091)","Mariaville Lake <br>County: Schenectady <br>Bloom Type: C <br>Coordinates: (42.8336983, -74.1119003)","Mariaville Lake <br>County: Schenectady <br>Bloom Type: HT <br>Coordinates: (42.8336983, -74.1119003)","Mariaville Lake <br>County: Schenectady <br>Bloom Type: HT <br>Coordinates: (42.8336983, -74.1119003)","Mariaville Lake <br>County: Schenectady <br>Bloom Type: C <br>Coordinates: (42.8336983, -74.1119003)","Mariaville Lake <br>County: Schenectady <br>Bloom Type: C <br>Coordinates: (42.8336983, -74.1119003)","Marion Lake <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (41.1254997, -72.3333969)","Marion Lake <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (41.1254997, -72.3333969)","Martlings Lake <br>County: Richmond <br>Bloom Type: C <br>Coordinates: (40.6222, -74.1167984)","Martlings Lake <br>County: Richmond <br>Bloom Type: HT <br>Coordinates: (40.6222, -74.1167984)","Martlings Lake <br>County: Richmond <br>Bloom Type: C <br>Coordinates: (40.6222, -74.1167984)","Martlings Lake <br>County: Richmond <br>Bloom Type: HT <br>Coordinates: (40.6222, -74.1167984)","Mckay Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9071007, -72.7953033)","Mecox Bay <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9012985, -72.3333969)","Melody Lake <br>County: Cortland <br>Bloom Type: C <br>Coordinates: (42.4702988, -75.8740997)","Mill Pond <br>County: Genesee <br>Bloom Type: HT <br>Coordinates: (43.08393, -78.05583)","Mill Pond <br>County: Genesee <br>Bloom Type: C <br>Coordinates: (43.08393, -78.05583)","Mill Pond (Watermill) <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9145012, -72.3582993)","Mill Pond (Watermill) <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9145012, -72.3582993)","Mill Pond (Watermill) <br>County: Suffolk <br>Bloom Type: HT <br>Coordinates: (40.9145012, -72.3582993)","Mill Pond (Watermill) <br>County: Suffolk <br>Bloom Type: HT <br>Coordinates: (40.9145012, -72.3582993)","Mill Pond (Watermill) <br>County: Suffolk <br>Bloom Type: HT <br>Coordinates: (40.9145012, -72.3582993)","Mill Pond (Watermill) <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9145012, -72.3582993)","Millsite Lake <br>County: Jefferson <br>Bloom Type: S <br>Coordinates: (44.2921982, -75.7675018)","Millsite Lake <br>County: Jefferson <br>Bloom Type: S <br>Coordinates: (44.2921982, -75.7675018)","Montgomery Lake <br>County: Sullivan <br>Bloom Type: C <br>Coordinates: (41.5252991, -74.9172974)","Montgomery Lake <br>County: Sullivan <br>Bloom Type: C <br>Coordinates: (41.5252991, -74.9172974)","Montgomery Lake <br>County: Sullivan <br>Bloom Type: C <br>Coordinates: (41.5252991, -74.9172974)","Montgomery Lake <br>County: Sullivan <br>Bloom Type: C <br>Coordinates: (41.5252991, -74.9172974)","Montgomery Lake <br>County: Sullivan <br>Bloom Type: C <br>Coordinates: (41.5252991, -74.9172974)","Montgomery Lake <br>County: Sullivan <br>Bloom Type: C <br>Coordinates: (41.5252991, -74.9172974)","Montgomery Lake <br>County: Sullivan <br>Bloom Type: C <br>Coordinates: (41.5252991, -74.9172974)","Moon Lake <br>County: Jefferson <br>Bloom Type: S <br>Coordinates: (44.2542992, -75.732399)","Moon Lake <br>County: Jefferson <br>Bloom Type: S <br>Coordinates: (44.2542992, -75.732399)","Moon Lake <br>County: Jefferson <br>Bloom Type: S <br>Coordinates: (44.2542992, -75.732399)","Moon Lake <br>County: Jefferson <br>Bloom Type: HT <br>Coordinates: (44.2542992, -75.732399)","Moreau Lake <br>County: Saratoga <br>Bloom Type: S <br>Coordinates: (43.36144, -73.68388)","Morningside Lake <br>County: Sullivan <br>Bloom Type: S <br>Coordinates: (41.75116, -74.651001)","Morningside Lake <br>County: Sullivan <br>Bloom Type: S <br>Coordinates: (41.75116, -74.651001)","Morningside Lake <br>County: Sullivan <br>Bloom Type: HT <br>Coordinates: (41.75116, -74.651001)","Morningside Lake <br>County: Sullivan <br>Bloom Type: HT <br>Coordinates: (41.75116, -74.651001)","Morningside Lake <br>County: Sullivan <br>Bloom Type: HT <br>Coordinates: (41.75116, -74.651001)","Morningside Pond <br>County: New York <br>Bloom Type: HT <br>Coordinates: (40.803761, -73.958943)","Morningside Pond <br>County: New York <br>Bloom Type: C <br>Coordinates: (40.803761, -73.958943)","Morningside Pond <br>County: New York <br>Bloom Type: C <br>Coordinates: (40.803761, -73.958943)","Mountain Lake <br>County: Sullivan <br>Bloom Type: HT <br>Coordinates: (41.6571007, -74.8147964)","Muchattoes Lake <br>County: Orange <br>Bloom Type: C <br>Coordinates: (41.4968987, -74.0309982)","Mud Lake <br>County: Steuben <br>Bloom Type: S <br>Coordinates: (42.4914017, -77.2791977)","Muscoot Reservoir <br>County: Westchester <br>Bloom Type: S <br>Coordinates: (41.2703018, -73.7113037)","Muscoot Reservoir <br>County: Westchester <br>Bloom Type: S <br>Coordinates: (41.2703018, -73.7113037)","Myosotis Lake <br>County: Albany <br>Bloom Type: C <br>Coordinates: (42.5201988, -74.1501999)","Nassau Lake <br>County: Rensselaer <br>Bloom Type: C <br>Coordinates: (42.5381012, -73.6037979)","Nassau Lake <br>County: Rensselaer <br>Bloom Type: C <br>Coordinates: (42.5381012, -73.6037979)","Nassau Lake <br>County: Rensselaer <br>Bloom Type: HT <br>Coordinates: (42.5381012, -73.6037979)","Nassau Lake <br>County: Rensselaer <br>Bloom Type: C <br>Coordinates: (42.5381012, -73.6037979)","Nassau Lake <br>County: Rensselaer <br>Bloom Type: C <br>Coordinates: (42.5381012, -73.6037979)","Nassau Lake <br>County: Rensselaer <br>Bloom Type: S <br>Coordinates: (42.5381012, -73.6037979)","Newark Reservoir <br>County: Ontario <br>Bloom Type: C <br>Coordinates: (42.9347, -77.0932999)","Newark Reservoir <br>County: Ontario <br>Bloom Type: C <br>Coordinates: (42.9347, -77.0932999)","New Croton Reservoir <br>County: Westchester <br>Bloom Type: S <br>Coordinates: (41.2388, -73.8219986)","New Croton Reservoir <br>County: Westchester <br>Bloom Type: S <br>Coordinates: (41.2388, -73.8219986)","New Croton Reservoir <br>County: Westchester <br>Bloom Type: S <br>Coordinates: (41.2388, -73.8219986)","New Rochelle Reservoir No.3 <br>County: Westchester <br>Bloom Type: S <br>Coordinates: (40.9463005, -73.8013)","New Rochelle Reservoir No.3 <br>County: Westchester <br>Bloom Type: S <br>Coordinates: (40.9463005, -73.8013)","Niger Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.8989983, -72.8195038)","Nooteeming Lake <br>County: Dutchess <br>Bloom Type: S <br>Coordinates: (41.7901001, -73.7851028)","North Sandy Pond <br>County: Jefferson <br>Bloom Type: C <br>Coordinates: (43.64303, -76.1851399)","North Sandy Pond <br>County: Oswego <br>Bloom Type: C <br>Coordinates: (43.64303, -76.1851399)","North Sandy Pond <br>County: Jefferson <br>Bloom Type: HT <br>Coordinates: (43.64303, -76.1851399)","North Sandy Pond <br>County: Oswego <br>Bloom Type: HT <br>Coordinates: (43.64303, -76.1851399)","North Sandy Pond <br>County: Oswego <br>Bloom Type: C <br>Coordinates: (43.64303, -76.1851399)","North Sandy Pond <br>County: Jefferson <br>Bloom Type: C <br>Coordinates: (43.64303, -76.1851399)","Norwich Reservoir East <br>County: Chenango <br>Bloom Type: S <br>Coordinates: (42.5497017, -75.4869995)","Oakland Lake <br>County: Queens <br>Bloom Type: C <br>Coordinates: (40.7585983, -73.7595978)","Olana Pond <br>County: Columbia <br>Bloom Type: S <br>Coordinates: (42.2117996, -73.831398)","Old Town Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.878721, -72.372558)","Old Town Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.878721, -72.372558)","Old Town Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.878721, -72.372558)","Old Town Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.878721, -72.372558)","Old Town Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.878721, -72.372558)","Onderdonk Lake <br>County: Albany <br>Bloom Type: C <br>Coordinates: (42.5442009, -74.0848999)","Oneida Lake <br>County: Oneida <br>Bloom Type: S <br>Coordinates: (43.2033005, -75.9100037)","Oneida Lake <br>County: Onondaga <br>Bloom Type: S <br>Coordinates: (43.2033005, -75.9100037)","Oneida Lake <br>County: Oswego <br>Bloom Type: S <br>Coordinates: (43.2033005, -75.9100037)","Oneida Lake <br>County: Madison <br>Bloom Type: S <br>Coordinates: (43.2033005, -75.9100037)","Oneida Lake <br>County: Madison <br>Bloom Type: HT <br>Coordinates: (43.2033005, -75.9100037)","Oneida Lake <br>County: Onondaga <br>Bloom Type: HT <br>Coordinates: (43.2033005, -75.9100037)","Oneida Lake <br>County: Oswego <br>Bloom Type: HT <br>Coordinates: (43.2033005, -75.9100037)","Oneida Lake <br>County: Oneida <br>Bloom Type: HT <br>Coordinates: (43.2033005, -75.9100037)","Oneida Lake <br>County: Madison <br>Bloom Type: S <br>Coordinates: (43.2033005, -75.9100037)","Oneida Lake <br>County: Oneida <br>Bloom Type: S <br>Coordinates: (43.2033005, -75.9100037)","Oneida Lake <br>County: Oswego <br>Bloom Type: S <br>Coordinates: (43.2033005, -75.9100037)","Oneida Lake <br>County: Onondaga <br>Bloom Type: S <br>Coordinates: (43.2033005, -75.9100037)","Oneida Lake <br>County: Onondaga <br>Bloom Type: S <br>Coordinates: (43.2033005, -75.9100037)","Oneida Lake <br>County: Oneida <br>Bloom Type: S <br>Coordinates: (43.2033005, -75.9100037)","Oneida Lake <br>County: Oswego <br>Bloom Type: S <br>Coordinates: (43.2033005, -75.9100037)","Oneida Lake <br>County: Madison <br>Bloom Type: S <br>Coordinates: (43.2033005, -75.9100037)","Oneida Lake <br>County: Oneida <br>Bloom Type: S <br>Coordinates: (43.2033005, -75.9100037)","Oneida Lake <br>County: Madison <br>Bloom Type: S <br>Coordinates: (43.2033005, -75.9100037)","Oneida Lake <br>County: Onondaga <br>Bloom Type: S <br>Coordinates: (43.2033005, -75.9100037)","Oneida Lake <br>County: Oswego <br>Bloom Type: S <br>Coordinates: (43.2033005, -75.9100037)","Oneida Lake <br>County: Onondaga <br>Bloom Type: C <br>Coordinates: (43.2033005, -75.9100037)","Oneida Lake <br>County: Madison <br>Bloom Type: C <br>Coordinates: (43.2033005, -75.9100037)","Oneida Lake <br>County: Oneida <br>Bloom Type: C <br>Coordinates: (43.2033005, -75.9100037)","Oneida Lake <br>County: Oswego <br>Bloom Type: C <br>Coordinates: (43.2033005, -75.9100037)","Oneida River <br>County: Onondaga <br>Bloom Type: HT <br>Coordinates: (43.210484, -76.266313)","Oneida River <br>County: Onondaga <br>Bloom Type: S <br>Coordinates: (43.210484, -76.266313)","Oneida River <br>County: Onondaga <br>Bloom Type: S <br>Coordinates: (43.210484, -76.266313)","Orange Lake <br>County: Orange <br>Bloom Type: C <br>Coordinates: (41.5488014, -74.1036987)","Orange Lake <br>County: Orange <br>Bloom Type: C <br>Coordinates: (41.5488014, -74.1036987)","Orange Lake <br>County: Orange <br>Bloom Type: C <br>Coordinates: (41.5488014, -74.1036987)","Orange Lake <br>County: Orange <br>Bloom Type: C <br>Coordinates: (41.5488014, -74.1036987)","Orange Lake <br>County: Orange <br>Bloom Type: HT <br>Coordinates: (41.5488014, -74.1036987)","Orange Lake <br>County: Orange <br>Bloom Type: C <br>Coordinates: (41.5488014, -74.1036987)","Orange Lake <br>County: Orange <br>Bloom Type: C <br>Coordinates: (41.5488014, -74.1036987)","Oswego River <br>County: Oswego <br>Bloom Type: HT <br>Coordinates: (43.397788, -76.471383)","Otisco Lake <br>County: Onondaga <br>Bloom Type: C <br>Coordinates: (42.8591003, -76.2794037)","Otisco Lake <br>County: Onondaga <br>Bloom Type: C <br>Coordinates: (42.8591003, -76.2794037)","Owasco Lake <br>County: Cayuga <br>Bloom Type: HT <br>Coordinates: (42.8737984, -76.5281982)","Owasco Lake <br>County: Cayuga <br>Bloom Type: HT <br>Coordinates: (42.8737984, -76.5281982)","Owasco Lake <br>County: Cayuga <br>Bloom Type: HT <br>Coordinates: (42.8737984, -76.5281982)","Owasco Lake <br>County: Cayuga <br>Bloom Type: HT <br>Coordinates: (42.8737984, -76.5281982)","Owasco Lake <br>County: Cayuga <br>Bloom Type: HT <br>Coordinates: (42.8737984, -76.5281982)","Owasco Lake <br>County: Cayuga <br>Bloom Type: HT <br>Coordinates: (42.8737984, -76.5281982)","Paine Lake <br>County: Westchester <br>Bloom Type: HT <br>Coordinates: (41.548, -73.69487)","Palmer Lake <br>County: Putnam <br>Bloom Type: C <br>Coordinates: (41.4387016, -73.6734009)","Panther Lake <br>County: Oswego <br>Bloom Type: C <br>Coordinates: (43.3292007, -75.908699)","Patterson Veterans Park Swim Pond <br>County: Putnam <br>Bloom Type: S <br>Coordinates: (41.5186005, -73.6149979)","Payne Lake <br>County: Jefferson <br>Bloom Type: S <br>Coordinates: (44.2834015, -75.6455994)","Peach Lake <br>County: Putnam <br>Bloom Type: C <br>Coordinates: (41.362999, -73.5800018)","Peach Lake <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.362999, -73.5800018)","Peach Lake <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.362999, -73.5800018)","Peach Lake <br>County: Putnam <br>Bloom Type: C <br>Coordinates: (41.362999, -73.5800018)","Peach Lake <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.362999, -73.5800018)","Peach Lake <br>County: Putnam <br>Bloom Type: C <br>Coordinates: (41.362999, -73.5800018)","Peach Lake <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.362999, -73.5800018)","Peach Lake <br>County: Putnam <br>Bloom Type: C <br>Coordinates: (41.362999, -73.5800018)","Peach Lake <br>County: Westchester <br>Bloom Type: HT <br>Coordinates: (41.362999, -73.5800018)","Peach Lake <br>County: Putnam <br>Bloom Type: HT <br>Coordinates: (41.362999, -73.5800018)","Peconic Lake <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9140015, -72.7177963)","Peconic River <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.916064, -72.694956)","Pennellville Pond <br>County: Oswego <br>Bloom Type: C <br>Coordinates: (43.2854004, -76.2677002)","Pine Valley Campground Lake <br>County: Broome <br>Bloom Type: S <br>Coordinates: (43.20679, -75.47633)","Pleasant Lake <br>County: Oswego <br>Bloom Type: C <br>Coordinates: (43.2354012, -76.222702)","Pleasant Lake <br>County: Oswego <br>Bloom Type: HT <br>Coordinates: (43.2354012, -76.222702)","Pleasure Lake <br>County: Sullivan <br>Bloom Type: C <br>Coordinates: (41.6960983, -74.6279984)","Pleasure Lake <br>County: Sullivan <br>Bloom Type: C <br>Coordinates: (41.6960983, -74.6279984)","Plymouth Reservoir <br>County: Chenango <br>Bloom Type: HT <br>Coordinates: (42.5881004, -75.651001)","Plymouth Reservoir <br>County: Chenango <br>Bloom Type: HT <br>Coordinates: (42.5881004, -75.651001)","Plymouth Reservoir <br>County: Chenango <br>Bloom Type: C <br>Coordinates: (42.5881004, -75.651001)","Port Bay <br>County: Wayne <br>Bloom Type: C <br>Coordinates: (43.2975998, -76.8320999)","Port Bay <br>County: Wayne <br>Bloom Type: C <br>Coordinates: (43.2975998, -76.8320999)","Poxabogue Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9446983, -72.2854004)","Prestons Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9030991, -72.8199005)","Prospect Park Lake <br>County: Kings <br>Bloom Type: HT <br>Coordinates: (40.6548996, -73.969902)","Prospect Park Lake <br>County: Kings <br>Bloom Type: HT <br>Coordinates: (40.6548996, -73.969902)","Prospect Park Lake <br>County: Kings <br>Bloom Type: HT <br>Coordinates: (40.6548996, -73.969902)","Prospect Park Lake <br>County: Kings <br>Bloom Type: HT <br>Coordinates: (40.6548996, -73.969902)","Prospect Park Lake <br>County: Kings <br>Bloom Type: C <br>Coordinates: (40.6548996, -73.969902)","Prospect Park Lake <br>County: Kings <br>Bloom Type: S <br>Coordinates: (40.6548996, -73.969902)","Putnam Lake <br>County: Putnam <br>Bloom Type: C <br>Coordinates: (41.4664001, -73.5395966)","Putnam Lake <br>County: Putnam <br>Bloom Type: C <br>Coordinates: (41.4664001, -73.5395966)","Putnam Lake <br>County: Putnam <br>Bloom Type: C <br>Coordinates: (41.4664001, -73.5395966)","Putnam Lake <br>County: Putnam <br>Bloom Type: C <br>Coordinates: (41.4664001, -73.5395966)","Putnam Lake <br>County: Putnam <br>Bloom Type: HT <br>Coordinates: (41.4664001, -73.5395966)","Putnam Lake <br>County: Putnam <br>Bloom Type: HT <br>Coordinates: (41.4664001, -73.5395966)","Quaker Lake <br>County: Cattaraugus <br>Bloom Type: S <br>Coordinates: (42.0433006, -78.8677979)","Quaker Lake <br>County: Dutchess <br>Bloom Type: S <br>Coordinates: (42.0433006, -78.8677979)","Quaker Lake <br>County: Cattaraugus <br>Bloom Type: S <br>Coordinates: (42.0433006, -78.8677979)","Quaker Lake <br>County: Cattaraugus <br>Bloom Type: S <br>Coordinates: (42.0433006, -78.8677979)","Raritan Bay Park Pond <br>County: Richmond <br>Bloom Type: S <br>Coordinates: (40.498819, -74.246519)","Red House Lake <br>County: Cattaraugus <br>Bloom Type: S <br>Coordinates: (42.1027985, -78.7445984)","Red House Lake <br>County: Cattaraugus <br>Bloom Type: S <br>Coordinates: (42.1027985, -78.7445984)","Red House Lake <br>County: Cattaraugus <br>Bloom Type: S <br>Coordinates: (42.1027985, -78.7445984)","Red House Lake <br>County: Cattaraugus <br>Bloom Type: S <br>Coordinates: (42.1027985, -78.7445984)","Red House Lake <br>County: Cattaraugus <br>Bloom Type: S <br>Coordinates: (42.1027985, -78.7445984)","Rensselaer Lake <br>County: Albany <br>Bloom Type: C <br>Coordinates: (42.6375, -73.54076)","Roaring Brook Lake <br>County: Putnam <br>Bloom Type: HT <br>Coordinates: (41.4388008, -73.8075027)","Roaring Brook Lake <br>County: Putnam <br>Bloom Type: HT <br>Coordinates: (41.4388008, -73.8075027)","Roaring Brook Lake <br>County: Putnam <br>Bloom Type: C <br>Coordinates: (41.4388008, -73.8075027)","Roaring Brook Lake <br>County: Putnam <br>Bloom Type: HT <br>Coordinates: (41.4388008, -73.8075027)","Roaring Brook Lake <br>County: Putnam <br>Bloom Type: C <br>Coordinates: (41.4388008, -73.8075027)","Robinson Pond <br>County: Columbia <br>Bloom Type: C <br>Coordinates: (42.1180992, -73.5552979)","Rockland Lake <br>County: Rockland <br>Bloom Type: S <br>Coordinates: (41.1385994, -73.9227982)","Rockland Lake <br>County: Rockland <br>Bloom Type: C <br>Coordinates: (41.1385994, -73.9227982)","Rockland Lake <br>County: Rockland <br>Bloom Type: S <br>Coordinates: (41.1385994, -73.9227982)","Rockland Lake <br>County: Rockland <br>Bloom Type: S <br>Coordinates: (41.1385994, -73.9227982)","Rockland Lake <br>County: Rockland <br>Bloom Type: C <br>Coordinates: (41.1385994, -73.9227982)","Rockland Lake <br>County: Rockland <br>Bloom Type: S <br>Coordinates: (41.1385994, -73.9227982)","Rockland Lake <br>County: Rockland <br>Bloom Type: S <br>Coordinates: (41.1385994, -73.9227982)","Rockland Lake <br>County: Rockland <br>Bloom Type: S <br>Coordinates: (41.1385994, -73.9227982)","Rondout Creek <br>County: Ulster <br>Bloom Type: C <br>Coordinates: (41.885055, -74.029968)","Roth Pond <br>County: Suffolk <br>Bloom Type: HT <br>Coordinates: (40.911804, -73.123789)","Roth Pond <br>County: Suffolk <br>Bloom Type: HT <br>Coordinates: (40.911804, -73.123789)","Roth Pond <br>County: Suffolk <br>Bloom Type: HT <br>Coordinates: (40.911804, -73.123789)","Roth Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.911804, -73.123789)","Round Lake <br>County: Orange <br>Bloom Type: S <br>Coordinates: (42.9339981, -73.7828979)","Round Lake <br>County: Saratoga <br>Bloom Type: C <br>Coordinates: (42.9339981, -73.7828979)","Round Lake <br>County: Saratoga <br>Bloom Type: C <br>Coordinates: (42.9339981, -73.7828979)","Sagaponack Lake <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9104004, -72.2910995)","Sagaponack Lake <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9104004, -72.2910995)","Sagaponack Lake <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9104004, -72.2910995)","Sagaponack Lake <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9104004, -72.2910995)","Saratoga Lake <br>County: Saratoga <br>Bloom Type: C <br>Coordinates: (43.0167007, -73.7415009)","Saratoga Lake <br>County: Saratoga <br>Bloom Type: HT <br>Coordinates: (43.0167007, -73.7415009)","Saratoga Lake <br>County: Saratoga <br>Bloom Type: C <br>Coordinates: (43.0167007, -73.7415009)","Saratoga Lake <br>County: Saratoga <br>Bloom Type: HT <br>Coordinates: (43.0167007, -73.7415009)","Saratoga Lake <br>County: Saratoga <br>Bloom Type: HT <br>Coordinates: (43.0167007, -73.7415009)","Sayre Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.8847008, -72.3529968)","Schroon Lake <br>County: Warren <br>Bloom Type: S <br>Coordinates: (43.7747993, -73.7779999)","Schroon Lake <br>County: Warren <br>Bloom Type: S <br>Coordinates: (43.7747993, -73.7779999)","Schroon Lake <br>County: Essex <br>Bloom Type: S <br>Coordinates: (43.7747993, -73.7779999)","Secor Lake <br>County: Putnam <br>Bloom Type: S <br>Coordinates: (41.3765984, -73.7873001)","Seneca Lake <br>County: Schuyler <br>Bloom Type: HT <br>Coordinates: (42.4424019, -76.884697)","Seneca Lake <br>County: Ontario <br>Bloom Type: HT <br>Coordinates: (42.4424019, -76.884697)","Seneca Lake <br>County: Seneca <br>Bloom Type: HT <br>Coordinates: (42.4424019, -76.884697)","Seneca Lake <br>County: Yates <br>Bloom Type: HT <br>Coordinates: (42.4424019, -76.884697)","Seneca Lake <br>County: Yates <br>Bloom Type: HT <br>Coordinates: (42.4424019, -76.884697)","Seneca Lake <br>County: Ontario <br>Bloom Type: HT <br>Coordinates: (42.4424019, -76.884697)","Seneca Lake <br>County: Seneca <br>Bloom Type: HT <br>Coordinates: (42.4424019, -76.884697)","Seneca Lake <br>County: Schuyler <br>Bloom Type: HT <br>Coordinates: (42.4424019, -76.884697)","Seneca Lake <br>County: Seneca <br>Bloom Type: HT <br>Coordinates: (42.4424019, -76.884697)","Seneca Lake <br>County: Ontario <br>Bloom Type: HT <br>Coordinates: (42.4424019, -76.884697)","Seneca Lake <br>County: Schuyler <br>Bloom Type: HT <br>Coordinates: (42.4424019, -76.884697)","Seneca Lake <br>County: Yates <br>Bloom Type: HT <br>Coordinates: (42.4424019, -76.884697)","Seneca Lake <br>County: Yates <br>Bloom Type: HT <br>Coordinates: (42.4424019, -76.884697)","Seneca Lake <br>County: Schuyler <br>Bloom Type: HT <br>Coordinates: (42.4424019, -76.884697)","Seneca Lake <br>County: Seneca <br>Bloom Type: HT <br>Coordinates: (42.4424019, -76.884697)","Seneca Lake <br>County: Ontario <br>Bloom Type: HT <br>Coordinates: (42.4424019, -76.884697)","Sepasco Lake <br>County: Dutchess <br>Bloom Type: C <br>Coordinates: (41.9598007, -73.8376007)","Setauket Mill Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9462013, -73.1156998)","Seventh Lake <br>County: Hamilton <br>Bloom Type: C <br>Coordinates: (43.7443, -74.73191)","Sheldrake Lake <br>County: Westchester <br>Bloom Type: HT <br>Coordinates: (40.9524002, -73.774498)","Sheldrake Lake <br>County: Westchester <br>Bloom Type: S <br>Coordinates: (40.9524002, -73.774498)","Silver Lake <br>County: Wyoming <br>Bloom Type: S <br>Coordinates: (42.69042, -78.02907)","Silver Lake <br>County: Wyoming <br>Bloom Type: HT <br>Coordinates: (42.69042, -78.02907)","Silver Lake <br>County: Westchester <br>Bloom Type: S <br>Coordinates: (41.0475006, -73.7468033)","Silver Lake <br>County: St. Lawrence <br>Bloom Type: HT <br>Coordinates: (42.69042, -78.02907)","Silver Lake <br>County: Wyoming <br>Bloom Type: HT <br>Coordinates: (42.69042, -78.02907)","Silver Lake <br>County: St Lawrence <br>Bloom Type: C <br>Coordinates: (44.2268982, -74.8265991)","Silver Lake <br>County: Wyoming <br>Bloom Type: C <br>Coordinates: (42.69042, -78.02907)","Silver Lake <br>County: St Lawrence <br>Bloom Type: C <br>Coordinates: (44.2268982, -74.8265991)","Silver Lake Reservoir <br>County: Richmond <br>Bloom Type: HT <br>Coordinates: (40.62325, -74.096163)","Silver Lake Reservoir <br>County: Richmond <br>Bloom Type: C <br>Coordinates: (40.62325, -74.096163)","Sixberry Lake <br>County: Jefferson <br>Bloom Type: C <br>Coordinates: (44.2798004, -75.7750015)","Sixtown Pond <br>County: Jefferson <br>Bloom Type: S <br>Coordinates: (43.82914667, -76.12647333)","Sixtown Pond/Crystal Lake <br>County: Jefferson <br>Bloom Type: C <br>Coordinates: (43.82914667, -76.12647333)","Skaneateles Lake <br>County: Onondaga <br>Bloom Type: HT <br>Coordinates: (42.8451004, -76.3503036)","Skaneateles Lake <br>County: Cayuga <br>Bloom Type: HT <br>Coordinates: (42.8451004, -76.3503036)","Skaneateles Lake <br>County: Onondaga <br>Bloom Type: HT <br>Coordinates: (42.8451004, -76.3503036)","Skaneateles Lake <br>County: Cayuga <br>Bloom Type: HT <br>Coordinates: (42.8451004, -76.3503036)","Skaneateles Lake <br>County: Cortland <br>Bloom Type: HT <br>Coordinates: (42.8451004, -76.3503036)","Sleepy Hollow Lake <br>County: Greene <br>Bloom Type: C <br>Coordinates: (42.2943993, -73.8069)","Sleepy Hollow Lake <br>County: Greene <br>Bloom Type: C <br>Coordinates: (42.2943993, -73.8069)","Sleepy Hollow Lake <br>County: Greene <br>Bloom Type: HT <br>Coordinates: (42.2943993, -73.8069)","Smith Pond <br>County: Steuben <br>Bloom Type: C <br>Coordinates: (42.3888016, -77.4744034)","Smith Pond <br>County: Steuben <br>Bloom Type: C <br>Coordinates: (42.3888016, -77.4744034)","Smith Pond <br>County: Steuben <br>Bloom Type: C <br>Coordinates: (42.3888016, -77.4744034)","Smith Pond <br>County: Steuben <br>Bloom Type: C <br>Coordinates: (42.3888016, -77.4744034)","Smith Pond <br>County: Steuben <br>Bloom Type: C <br>Coordinates: (42.3888016, -77.4744034)","Smith Pond <br>County: Steuben <br>Bloom Type: HT <br>Coordinates: (42.3888016, -77.4744034)","Snyders Lake <br>County: Rensselaer <br>Bloom Type: C <br>Coordinates: (42.6631012, -73.634697)","Snyders Lake <br>County: Rensselaer <br>Bloom Type: C <br>Coordinates: (42.6631012, -73.634697)","Snyders Lake <br>County: Rensselaer <br>Bloom Type: C <br>Coordinates: (42.6631012, -73.634697)","Sodus Bay <br>County: Wayne <br>Bloom Type: C <br>Coordinates: (43.2482986, -76.9585037)","Sodus Bay <br>County: Wayne <br>Bloom Type: C <br>Coordinates: (43.2482986, -76.9585037)","Sodus Bay <br>County: Wayne <br>Bloom Type: C <br>Coordinates: (43.2482986, -76.9585037)","Sodus Bay <br>County: Wayne <br>Bloom Type: C <br>Coordinates: (43.2482986, -76.9585037)","Sodus Bay <br>County: Wayne <br>Bloom Type: C <br>Coordinates: (43.2482986, -76.9585037)","Sodus Bay <br>County: Wayne <br>Bloom Type: S <br>Coordinates: (43.2482986, -76.9585037)","Somerset Lake <br>County: Delaware <br>Bloom Type: C <br>Coordinates: (41.9101982, -75.2289963)","Somerset Lake <br>County: Delaware <br>Bloom Type: C <br>Coordinates: (41.9101982, -75.2289963)","Somerset Lake <br>County: Delaware <br>Bloom Type: C <br>Coordinates: (41.9101982, -75.2289963)","Song Lake <br>County: Cortland <br>Bloom Type: C <br>Coordinates: (42.7723007, -76.146864)","Song Lake <br>County: Cortland <br>Bloom Type: C <br>Coordinates: (42.7723007, -76.146864)","Song Lake <br>County: Cortland <br>Bloom Type: HT <br>Coordinates: (42.7723007, -76.146864)","Song Lake <br>County: Cortland <br>Bloom Type: HT <br>Coordinates: (42.7723007, -76.146864)","Song Lake <br>County: Cortland <br>Bloom Type: HT <br>Coordinates: (42.7723007, -76.146864)","Song Lake <br>County: Cortland <br>Bloom Type: HT <br>Coordinates: (42.7723007, -76.146864)","Song Lake <br>County: Cortland <br>Bloom Type: HT <br>Coordinates: (42.7723007, -76.146864)","South Merrits Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.61927, -73.95696)","South Sandy Pond <br>County: Oswego <br>Bloom Type: S <br>Coordinates: (43.62339, -76.19037)","Spring Lake <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.8737984, -72.9587021)","Spring Lake <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.8737984, -72.9587021)","Spring Lake <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.8737984, -72.9587021)","St Lawrence River <br>County: St Lawrence <br>Bloom Type: S <br>Coordinates: (44.889843, -75.120136)","Stony Brook Duck Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9141998, -73.1470032)","Stony Brook Duck Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9141998, -73.1470032)","Sturgeon Pool <br>County: Ulster <br>Bloom Type: S <br>Coordinates: (41.8436012, -74.0426025)","Sucker Brook <br>County: Cayuga <br>Bloom Type: HT <br>Coordinates: (42.875013, -77.276525)","Sucker Brook <br>County: Ontario <br>Bloom Type: C <br>Coordinates: (42.875013, -77.276525)","Sucker Brook <br>County: Cayuga <br>Bloom Type: C <br>Coordinates: (42.900811, -76.528124)","Sucker Brook <br>County: Ontario <br>Bloom Type: C <br>Coordinates: (42.875013, -77.276525)","Summit Lake <br>County: Washington <br>Bloom Type: C <br>Coordinates: (43.2102013, -73.4632034)","Summit Lake <br>County: Washington <br>Bloom Type: C <br>Coordinates: (43.2102013, -73.4632034)","Summit Lake <br>County: Schoharie <br>Bloom Type: S <br>Coordinates: (42.5831985, -74.5814972)","Sylvan Lake <br>County: Dutchess <br>Bloom Type: S <br>Coordinates: (41.58839, -73.69782)","Tanglewood Lake <br>County: Steuben <br>Bloom Type: C <br>Coordinates: (42.193635, -77.251116)","Tarrytown Reservoir <br>County: Westchester <br>Bloom Type: S <br>Coordinates: (41.0824013, -73.8420029)","Tarrytown Reservoir <br>County: Westchester <br>Bloom Type: S <br>Coordinates: (41.0824013, -73.8420029)","The Lake in Central Park <br>County: New York <br>Bloom Type: HT <br>Coordinates: (40.775738, -73.971765)","The Lake in Central Park <br>County: New York <br>Bloom Type: HT <br>Coordinates: (40.775738, -73.971765)","The Lake in Central Park <br>County: New York <br>Bloom Type: HT <br>Coordinates: (40.775738, -73.971765)","The Pond in Central Park <br>County: New York <br>Bloom Type: C <br>Coordinates: (40.69744, -73.97944)","Thunder Lake <br>County: Chenango <br>Bloom Type: S <br>Coordinates: (42.269001, -75.7279968)","Tillson Lake <br>County: Ulster <br>Bloom Type: S <br>Coordinates: (41.672699, -74.2482986)","Titus Lake <br>County: Delaware <br>Bloom Type: C <br>Coordinates: (42.5017014, -74.7127991)","Tomahawk Lake <br>County: Orange <br>Bloom Type: HT <br>Coordinates: (41.4091988, -74.2233963)","Tomahawk Lake <br>County: Orange <br>Bloom Type: HT <br>Coordinates: (41.4091988, -74.2233963)","Tomahawk Lake <br>County: Orange <br>Bloom Type: S <br>Coordinates: (41.4091988, -74.2233963)","Tomhannock Reservoir <br>County: Rensselaer <br>Bloom Type: S <br>Coordinates: (42.857399, -73.5681992)","Tomhannock Reservoir <br>County: Rensselaer <br>Bloom Type: S <br>Coordinates: (42.857399, -73.5681992)","Town of Babylon Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.70963, -73.32589)","Troy Reservoir <br>County: Rensselaer <br>Bloom Type: C <br>Coordinates: (42.8664, -73.55556)","Truesdale Lake <br>County: Westchester <br>Bloom Type: S <br>Coordinates: (41.2817001, -73.5533981)","Truesdale Lake <br>County: Westchester <br>Bloom Type: C <br>Coordinates: (41.2817001, -73.5533981)","Tully Lake <br>County: Onondaga <br>Bloom Type: C <br>Coordinates: (42.7764015, -76.1352005)","Tully Lake <br>County: Cortland <br>Bloom Type: C <br>Coordinates: (42.7764015, -76.1352005)","Tully Lake <br>County: Cortland <br>Bloom Type: C <br>Coordinates: (42.7764015, -76.1352005)","Tully Lake <br>County: Onondaga <br>Bloom Type: C <br>Coordinates: (42.7764015, -76.1352005)","Tully Lake <br>County: Cortland <br>Bloom Type: C <br>Coordinates: (42.7764015, -76.1352005)","Tully Lake <br>County: Cortland <br>Bloom Type: C <br>Coordinates: (42.7764015, -76.1352005)","Tully Lake <br>County: Cortland <br>Bloom Type: C <br>Coordinates: (42.7764015, -76.1352005)","Turtle Pond <br>County: New York <br>Bloom Type: HT <br>Coordinates: (40.7793007, -73.9673996)","Turtle Pond <br>County: Oneida <br>Bloom Type: S <br>Coordinates: (40.7793007, -73.9673996)","Turtle Pond <br>County: New York <br>Bloom Type: HT <br>Coordinates: (40.7793007, -73.9673996)","Turtle Pond <br>County: New York <br>Bloom Type: HT <br>Coordinates: (40.7793007, -73.9673996)","Turtle Pond <br>County: New York <br>Bloom Type: HT <br>Coordinates: (40.7793007, -73.9673996)","Tuscarora Lake <br>County: Madison <br>Bloom Type: C <br>Coordinates: (42.8665009, -75.7585983)","Tuscarora Lake <br>County: Madison <br>Bloom Type: C <br>Coordinates: (42.8665009, -75.7585983)","Tuxedo Lake <br>County: Orange <br>Bloom Type: C <br>Coordinates: (41.2014999, -74.2058029)","Tuxedo Lake <br>County: Orange <br>Bloom Type: C <br>Coordinates: (41.2014999, -74.2058029)","Unnamed Pond Algonquin Park <br>County: Orange <br>Bloom Type: S <br>Coordinates: (41.5219002, -74.0615005)","Unnamed Pond Cameron Mills <br>County: Steuben <br>Bloom Type: HT <br>Coordinates: (42.19094, -77.358066)","Unnamed Pond Delta Lake SP <br>County: Oneida <br>Bloom Type: S <br>Coordinates: (43.28994, -75.417986)","Unnamed Pond Fairport <br>County: Monroe <br>Bloom Type: C <br>Coordinates: (43.119955, -77.405022)","Unnamed Pond Orchard Park <br>County: Erie <br>Bloom Type: S <br>Coordinates: (42.7547, -78.7258)","Unnamed Wallkill Pond <br>County: Ulster <br>Bloom Type: C <br>Coordinates: (41.6502991, -74.2203979)","Upper Little York Lake <br>County: Cortland <br>Bloom Type: HT <br>Coordinates: (40.69744, -73.97944)","Valatie Kill <br>County: Rensselaer <br>Bloom Type: S <br>Coordinates: (42.521009, -73.60809)","Vandercamp Lake <br>County: Oswego <br>Bloom Type: S <br>Coordinates: (40.8328, -73.10937)","Wainscott Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9292984, -72.2425995)","Wainscott Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9292984, -72.2425995)","Wainscott Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9292984, -72.2425995)","Wainscott Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.9292984, -72.2425995)","Wallkill River <br>County: Ulster <br>Bloom Type: HT <br>Coordinates: (41.743866, -74.093447)","Wallkill River <br>County: Ulster <br>Bloom Type: S <br>Coordinates: (41.743866, -74.093447)","Waneta Lake <br>County: Schuyler <br>Bloom Type: S <br>Coordinates: (42.444741, -77.100706)","Waneta Lake <br>County: Steuben <br>Bloom Type: S <br>Coordinates: (42.444741, -77.100706)","Waneta Lake <br>County: Steuben <br>Bloom Type: S <br>Coordinates: (42.444741, -77.100706)","Waneta Lake <br>County: Steuben <br>Bloom Type: S <br>Coordinates: (42.444741, -77.100706)","Waneta Lake <br>County: Schuyler <br>Bloom Type: S <br>Coordinates: (42.444741, -77.100706)","Waneta Lake <br>County: Schuyler <br>Bloom Type: S <br>Coordinates: (42.444741, -77.100706)","Waneta Lake <br>County: Steuben <br>Bloom Type: S <br>Coordinates: (42.444741, -77.100706)","Waneta Lake <br>County: Schuyler <br>Bloom Type: S <br>Coordinates: (42.444741, -77.100706)","Waneta Lake <br>County: Schuyler <br>Bloom Type: S <br>Coordinates: (42.444741, -77.100706)","Waneta Lake <br>County: Steuben <br>Bloom Type: S <br>Coordinates: (42.444741, -77.100706)","Warners Lake <br>County: Albany <br>Bloom Type: C <br>Coordinates: (42.6250992, -74.0791016)","Warners Lake <br>County: Albany <br>Bloom Type: HT <br>Coordinates: (42.6250992, -74.0791016)","Warn Lake <br>County: Chenango <br>Bloom Type: C <br>Coordinates: (42.3745995, -75.6464005)","Washington Park Pond <br>County: Albany <br>Bloom Type: HT <br>Coordinates: (42.6571007, -73.7733002)","Washington Park Pond <br>County: Albany <br>Bloom Type: HT <br>Coordinates: (42.6571007, -73.7733002)","Washington Park Pond <br>County: Albany <br>Bloom Type: C <br>Coordinates: (42.6571007, -73.7733002)","Wee Wah Lake <br>County: Orange <br>Bloom Type: HT <br>Coordinates: (41.21707, -74.19247)","Wee Wah Lake <br>County: Orange <br>Bloom Type: HT <br>Coordinates: (41.21707, -74.19247)","White Birch Lake <br>County: Broome <br>Bloom Type: C <br>Coordinates: (42.0404015, -75.6368027)","Whitney Point Reservoir <br>County: Broome <br>Bloom Type: S <br>Coordinates: (42.32912, -75.96575)","Wickapogue Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.8805008, -72.3676987)","Wickapogue Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.8805008, -72.3676987)","Wickapogue Pond <br>County: Suffolk <br>Bloom Type: C <br>Coordinates: (40.8805008, -72.3676987)","Wilcox Memorial Park Pond <br>County: Dutchess <br>Bloom Type: HT <br>Coordinates: (41.95313, -73.72645113)","Wilcox Memorial Park Pond (North) <br>County: Dutchess <br>Bloom Type: C <br>Coordinates: (41.95313, -73.72645113)","Wilcox Memorial Park Pond (South) <br>County: Dutchess <br>Bloom Type: HT <br>Coordinates: (41.95313, -73.72645113)","Wildwood Lake <br>County: Suffolk <br>Bloom Type: S <br>Coordinates: (40.89548, -72.674984)","Willowbrook Pond <br>County: Richmond <br>Bloom Type: HT <br>Coordinates: (40.6055984, -74.1578979)","Willowbrook Pond <br>County: Richmond <br>Bloom Type: C <br>Coordinates: (40.6055984, -74.1578979)","Winding Hills Park Lake <br>County: Orange <br>Bloom Type: C <br>Coordinates: (41.5387993, -74.2752991)","Winding Hills Park Lake <br>County: Orange <br>Bloom Type: C <br>Coordinates: (41.5387993, -74.2752991)","Wolfes Pond SW <br>County: Richmond <br>Bloom Type: HT <br>Coordinates: (40.5157013, -74.1922989)","Wolf Lake <br>County: Sullivan <br>Bloom Type: C <br>Coordinates: (41.5866013, -74.5880966)","Wolf Lake <br>County: Sullivan <br>Bloom Type: C <br>Coordinates: (41.5866013, -74.5880966)","Wyomoco Pond <br>County: Wyoming <br>Bloom Type: S <br>Coordinates: (42.7661018, -78.2934036)","Wyomoco Pond <br>County: Wyoming <br>Bloom Type: S <br>Coordinates: (42.7661018, -78.2934036)"],null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[40.498819,44.889843],"lng":[-79.7261963,-71.9101028]}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="results-and-conclusions" class="section level1">
+<h1>Results and Conclusions</h1>
+<p>Algal blooms occur when exposed to the correct environmental
+conditions (i.e. excess nutrients, warm temperatures, ample sunlight,
+and low-flow water conditions). The maps and other graphics created
+above are carefully planned to convey the results of harmful algal
+blooms increasing over time in New York State. A map of New York State
+counties is provided as a reference map to refer back to in regards to
+populations. As shown on the map, the darker counties have larger
+populations. Downstate counties towards New York City and Long Island
+have some of the highest populations per county. This corresponds with
+the leaflet map because there are higher amounts of algal bloom
+occurrences in these higher populated counties. Higher populated areas
+tend to have more impaired water bodies and can be a great source
+nutrients for algae to grow.</p>
+<p>The average maximum temperatures for New York State weather stations
+was not the results I expected. From 1980-2010 the maximum temperatures
+did not fluctuate too much. I was predicting there to be a higher
+increase in temperature maximums due to global warming and an increased
+amount of algal blooms. Higher temperatures typically lead to more algae
+blooms. Further investigation to include more recent weather station
+data could possibly change the data to have more expected results.</p>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+<p>American Community Survey 5-Year Data (2009-2021). (2022, December
+9). Census Bureau. Retrieved December 16, 2022, from <a
+href="https://www.census.gov/data/developers/data-sets/acs-5year.html"
+class="uri">https://www.census.gov/data/developers/data-sets/acs-5year.html</a></p>
+<p>Datasets | Climate Data Online (CDO) | National Climatic Data Center
+(NCDC). (n.d.). National Centers for Environmental Information.
+Retrieved December 16, 2022, from <a
+href="https://www.ncdc.noaa.gov/cdo-web/datasets"
+class="uri">https://www.ncdc.noaa.gov/cdo-web/datasets</a></p>
+<p>Harmful Algal Blooms (HABs) - NYS Dept. of Environmental
+Conservation. (n.d.). New York State Department of Environmental
+Conservation. Retrieved December 16, 2022, from <a
+href="https://www.dec.ny.gov/chemical/77118.html"
+class="uri">https://www.dec.ny.gov/chemical/77118.html</a></p>
+</div>
+
+<!-- give the footer some space -->
+<br/>
+<br/>
+
+<footer id="site-footer">
+  <div id="footer1">
+  This website is a project for Adam Wilson's <a href="https://wilsonlab.io/GEO511"><i> Spatial Data Science (GEO511) </i></a>Course at the University at Buffalo
+  </div>
+  <div id="footer2">
+  <a rel="license" property="http://creativecommons.org/ns#license"
+  href="http://creativecommons.org/licenses/by/4.0/" ><img src="img/cc-by.svg" alt="cc-by"/></a> 
+  </div>
+</footer>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+
+</body>
+</html>

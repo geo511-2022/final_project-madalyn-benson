@@ -129,21 +129,16 @@ package.
 2.  creating a time-series graph of temperature trends over time for NYS
     counties
 
-3.  creating a map of NYS impaired water bodies
-
-4.  creating interactive maps that display the following when a country
-    is clicked on: population HAB occurrences
+3.  creating interactive maps that display the following when a country
+    is clicked on: county, year, and type of algal bloom
 
 # Expected results
 
 Overall, I believe this project will be a successful attempt at
 monitoring the predictability of harmful algal bloom prevalence in NYS.
 Based on my expectations of this outline, relevant data will be
-projected in an effective way to show statistically relevalant
+projected in an effective way to show statistically relevant
 correlations.
-
-Load any required packages in a code chunk (you may need to install some
-packages):
 
 ## Download and clean all required data
 
@@ -213,8 +208,6 @@ ggplot(ny_noaa_summary, aes(x = Year, y = mean_tmax, group = Year, color = Month
 ```
 
 ```{r}
-library(shiny)
-library(shinythemes)
 library(ggplot2)
 library(maps)
 library(leaflet)
@@ -225,7 +218,7 @@ library(tmap)
 
 noaa_df = readr::read_csv("data/Harmful_Algal_Bloom_Statewide_Occurrence_Summary__2012-2018.csv")
  
-
+str(noaa_df)
 m <- leaflet(noaa_df, options = leafletOptions(minZoom = 6, dragging = TRUE)) %>%
   setView(lat = 43, lng = -75, zoom = 6) %>%
   setMaxBounds(lng1 = -70, 
@@ -233,8 +226,10 @@ m <- leaflet(noaa_df, options = leafletOptions(minZoom = 6, dragging = TRUE)) %>
                lng2 = -80, 
                lat2 = 45) %>%
   addTiles() %>%
-  addCircles(popup= noaa_df$`County`) 
+  addMarkers(data = noaa_df,
+             popup= ~paste(`Waterbody Name`, "<br>County:",`County`, "<br>Bloom Type:", `Bloom Type`,"<br>Coordinates:", `Location 1`))
 m  # Print the map
+
 ```
 
 # Results

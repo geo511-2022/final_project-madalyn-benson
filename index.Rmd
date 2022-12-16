@@ -1,105 +1,254 @@
 ---
 title: "My Final Project Template"
-author: Your name here
-subtitle: Subtitle here if desired
+author: Madalyn Benson
+subtitle: Predictability of Harmful Algal Bloom Prevalance in NYS
+editor_options: 
+  markdown: 
+    wrap: 72
 ---
 
 # Introduction
 
-[~ 200 words]
+An algal bloom is the overgrowth of algae in water sources. Algal blooms
+occur when exposed to the correct environmental conditions (i.e. excess
+nutrients, warm temperatures, ample sunlight, and low-flow water
+conditions). A bloom can be short-lived (a couple of hours) or
+long-lived (a couple of weeks) depending on how long the algae persist
+in the environment. Harmful algal blooms (HABs) can be harmful to humans
+and the environment. When this occurs the algal species can produce
+toxins with serious health impacts to humans, degrade aquatic
+ecosystems, and also affect the economy near coastal areas. The dominant
+algae in New York State include but are not limited to: Green algae
+(Chlorophyta) Golden brown algae (Chrysophyta), which also includes a
+large group of diatoms Blue-green algae (Cyanobacteria) Several smaller
+groups including (euglenoids, cryptomonads, and dinoflagellates)
 
-Clearly stated background and questions / hypotheses / problems being addressed. Sets up the analysis in an interesting and compelling way.
+The presence of the above harmful algal blooms varies both spatially and
+temporally in NYS, which results in varying risk for people, animals,
+and the local ecology. HABs are most prevalent in the months June
+through October, however they can occur at any time of year. HABs reduce
+tourism, close beaches, and greatly diminish local economies. Because of
+this unpredictability, harmful algal blooms are of national concern.
+Data suggests that certain environmental conditions can be used as a
+tool to better understand and predict HABs. This project aims to explore
+any trends between harmful algal blooms prevalence within New York State
+by relating HAB prevalence over time to environmental conditions and
+populations.
 
 # Materials and methods
 
-[~ 200 words]
+## Example 1
 
-Narrative: Clear narrative description of the data sources and methods. Includes data from at least two sources that were integrated / merged in R.
+![Water Quality Assessment of New York
+State](https://www.dec.ny.gov/images/water_images/305basmtmap10.jpg)
 
-Code: The code associated with the project is well organized and easy to follow. Demonstrates mastery of R graphics and functions.
+Image 1 is the extracted raster data of the New York State water quality
+report from the New York State Department of Environmental Conservation
+(DEC). I selected this image as an example because I will be needing a
+raster data image of New York for my project. This is a useful resource
+because it shows the water bodies in NYS. In my final project I will be
+showing where and when harmful algal blooms affect the water bodies of
+New York. <https://www.dec.ny.gov/chemical/66532.html>
 
-Data: The underlying data are publicly accessible via the web and downloaded/accessed within the Rmd script. If you want to use your own data, you must make it available on a website (e.g. Figshare) so that others are able to re-run your code.
+## Example 2
 
-You can do bullets like this:
+![Climate Data
+Grapher](https://www.nyclimatescience.org/static/media/datagrapher.14b4fecf.png)
 
-* The first most important thing
-* The second most important thing
-* The third most important thing
+Image 2 is an interactive map of annual maximum temperatures in New York
+State from the New York Climate Change Science Clearinghouse (NYCCSC).
+This is a valuable data source because the user can select data from New
+York State stations from gridded observations, spatially aggregated by
+New York counties and river basins, or by states neighboring New York.
+Different time periods can be observed to see temperature changes over
+time. <https://www.nyclimatescience.org/highlights/data_products>
 
-You can do numbers like this:
+## Example 3
 
-1. The first most important thing
-2. The second most important thing
-3. The third most important thing
+![Freqeuncy of HAB
+Events](https://www.researchgate.net/profile/Kb-Padmakumar/publication/236142114/figure/fig4/AS:328425987428355@1455314265478/Frequency-of-occurrence-of-harmful-algal-blooms-during-the-last-century.png)
 
-See [http://rmarkdown.rstudio.com/](http://rmarkdown.rstudio.com/) for all the amazing things you can do.
+Image 3 is a figure displaying the occurrence of HAB events over time.
+This is a useful graphic because it is showing a sharp increase in algal
+blooms over 100 years. I would like to create a chart similar to this
+inorder to provide reasoning for an increase in algal blooms across NYS.
+I would do this by comparing other correlating data trends to support an
+increase in algal blooms.
+<https://www.researchgate.net/figure/Frequency-of-occurrence-of-harmful-algal-blooms-during-the-last-century_fig4_236142114>
+
+# Proposed data sources
+
+1.  Water quality data <https://www.dec.ny.gov/chemical/31290.html> To
+    get water quality data for NYS, I plan on using the NYS Section
+    303(d) list of impaired/TMDL waters. Every two years, the Federal
+    Clean Water Act and supporting federal regulations require states to
+    submit a list of impaired waters that require the development of a
+    Total Maximum Daily Load (TMDL). I will be using the 2020-2022 Clean
+    Water Act (CWA) data set.
+
+2.  Spatial polygon data of NYS Counties
+    <http://gis.ny.gov/gisdata/metadata/nysgis.Counties_Shoreline.pdf>
+    To get polygon data for NYS, I plan on using the NYS Civil
+    Boundaries County Shoreline data from NYS GIS Clearinghouse. This
+    dataset has accurate polygon edges for the edge of NYS counties.
+    This is essential because these polygons will be used to extract
+    data from the NLCD dataset, which has accurate data on the
+    shorelines of state and county polygons.
+
+3.  Spatial polygon data of algal blooms
+    <https://www.dec.ny.gov/chemical/83332.html> In order to track the
+    HABs in NYS, I will be using the DEC 2012-2019 HABs archive summary
+    to summarize all water bodies with harmful algal blooms documented.
+    This will show algal bloom trends in NYS over time.
+
+4.  Spatial data showing NYS temperatures over time
+    <https://www.nyclimatescience.org/highlights/data_products> I will
+    be using the interactive map of annual maximum temperatures in New
+    York State from the New York Climate Change Science Clearinghouse
+    (NYCCSC) to select data from New York State stations and observe
+    temperature trends over time. I could also use NOAA temperatures at
+    varying weather stations across NYS.
+
+5.  Annual Population Estimates for New York State and Counties:
+    Beginning 1970
+    <https://data.ny.gov/Government-Finance/Annual-Population-Estimates-for-New-York-State-and/krt9-ym2k/data>
+    I will be using this data to correlate a relationship between
+    population density and HAB prevalence.
+
+# Proposed methods
+
+I will use the raster or read_sf package to download spatial polygon
+data for NYS counties. I will use the merge function to join all data
+and the tmap package to create the choropleth maps. To create an
+interactive map to display the data listed above, I will use the leaflet
+package.
+
+1.  creating a choropleth map for: average populations at county level
+    across NYS
+
+2.  creating a time-series graph of temperature trends over time for NYS
+    counties
+
+3.  creating interactive maps that display the following when a country
+    is clicked on: county, year, and type of algal bloom
+
+# Expected results
+
+Overall, I believe this project will be a successful attempt at
+monitoring the predictability of harmful algal bloom prevalence in NYS.
+Based on my expectations of this outline, relevant data will be
+projected in an effective way to show statistically relevant
+correlations.
 
 
-Here's my first code chunk.
+# Materials and Methods
+
+### Create a choroplethr map of average populations at county level across NYS
 ```{r}
-1+2
+library(choroplethr)
+library(choroplethrMaps)
+library(janitor)
+#default parameters
+data(df_pop_county)
+#zoom into new york state with additional reference map
+county_choropleth(df_pop_county,
+                  title = "New York County Population Estimates, 2012",
+                  legend = "Population",
+                  state_zoom = "new york")
 ```
 
-Load any required packages in a code chunk (you may need to install some packages):
-
-```{r, message=F, warning=F}
+### Create a time-series graph of temperature trends over time for weather stations across NYS
+```{r}
 library(tidyverse)
+library(dplyr)
+library(p8105.datasets)
+library(patchwork)
+library(ggridges)
+
+knitr::opts_chunk$set(
+  fig.width = 6,
+  fig.asp = .6,
+  out.width = "90%"
+)
+
+theme_set(theme_minimal() + theme(legend.position = "bottom"))
+
+options(
+  ggplot2.continuous.colour = "viridis",
+  ggplot2.continuous.fill = "viridis"
+)
+
+scale_colour_discrete = scale_colour_viridis_d
+scale_fill_discrete = scale_fill_viridis_d
+
+data(ny_noaa)
+head(ny_noaa, 10)
+
+ny_noaa_structure = print(str(ny_noaa))
+
+ny_noaa_tidy = 
+  ny_noaa %>%
+  janitor::clean_names() %>%
+  separate(date, into = c("Year", "Month", "Day")) %>%
+  mutate(tmax = as.numeric(tmax), tmin = as.numeric(tmin), Year = as.numeric(Year), Month = as.numeric(Month), Day = as.numeric(Day)) %>%
+   mutate(Month = month.name[Month]) %>%
+  mutate(tmax = tmax/10, 
+         tmin = tmin/10, 
+         prcp = prcp/10)
+
+ny_noaa_summary =
+  ny_noaa_tidy %>%
+  filter(Month %in% c("January", "July")) %>%
+  group_by(id, Year, Month) %>%
+  summarize(mean_tmax = mean(tmax), na.rm = TRUE)
+
+ggplot(ny_noaa_summary, aes(x = Year, y = mean_tmax, group = Year, color = Month)) +
+    geom_boxplot() + 
+    facet_grid(. ~ Month) +
+    theme(legend.position = "none") + 
+  labs(title = "Average Maximum Temperature for New York State Weather Stations",y = "Average Maximum Temperature (C)")
+
+```
+
+### Create an interactive map displaying county, year, and type of algal bloom when a waterbody is clicked on
+```{r}
+library(ggplot2)
+library(maps)
 library(leaflet)
-library(kableExtra)
-knitr::opts_chunk$set(cache=TRUE)  # cache the results for quick compiling
+library(tidyverse)
+library(RColorBrewer)
+library(dplyr)
+library(tmap)
+
+noaa_df = readr::read_csv("data/Harmful_Algal_Bloom_Statewide_Occurrence_Summary__2012-2018.csv")
+ 
+str(noaa_df)
+m <- leaflet(noaa_df, options = leafletOptions(minZoom = 6, dragging = TRUE)) %>%
+  setView(lat = 43, lng = -75, zoom = 6) %>%
+  setMaxBounds(lng1 = -70, 
+               lat1 = 40, 
+               lng2 = -80, 
+               lat2 = 45) %>%
+  addTiles() %>%
+  addMarkers(data = noaa_df,
+             popup= ~paste(`Waterbody Name`, "<br>County:",`County`, "<br>Bloom Type:", `Bloom Type`,"<br>Coordinates:", `Location 1`))
+m  # Print the map
+
 ```
 
-## Download and clean all required data
-```{r}
-n=20
-data=data.frame(x=runif(n,-180,180),
-                y=runif(n,-60,60),
-                size = runif(n, 5, 20),
-                category = factor(
-                  sample(letters[1:5], n, replace = TRUE)
-                  ),
-                value = rnorm(n))
-```
+# Results and Conclusions
 
-```{r, results='asis'}
-data %>% 
-  slice(1:10) %>% #show only 1:n rows
-  kable(digits=2,align="c")%>% #make table and round to two digits
-  kable_styling(bootstrap_options = 
-                  c("striped", "hover", "condensed", "responsive")) #apply other formatting
-```
+Algal blooms occur when exposed to the correct environmental conditions (i.e. excess nutrients, warm temperatures, ample sunlight, and low-flow water conditions). The maps and other graphics created above are carefully planned to
+convey the results of harmful algal blooms increasing over time in New York State. A map of New York State counties is provided as a reference map to refer back to in regards to populations. As shown on the map, the darker counties have larger populations. Downstate counties towards New York City and Long Island have some of the highest populations per county. This corresponds with the leaflet map because there are higher amounts of algal bloom occurrences in these higher populated counties. Higher populated areas tend to have more impaired water bodies and can be a great source nutrients for algae to grow.
 
-Add any additional processing steps here.
+The average maximum temperatures for New York State weather stations was not the results I expected. From 1980-2010 the maximum temperatures did not fluctuate too much. I was predicting there to be a higher increase in temperature maximums due to global warming and an increased amount of algal blooms. Higher temperatures typically lead to more algae blooms. Further investigation to include more recent weather station data could possibly change the data to have more expected results. 
 
-# Results
-
-[~200 words]
-
-Tables and figures (maps and other graphics) are carefully planned to convey the results of your analysis. Intense exploration and evidence of many trials and failures. The author looked at the data in many different ways before coming to the final presentation of the data.
-
-Show tables, plots, etc. and describe them.
-
-```{r, fig.width=6, fig.height=3, fig.cap="Map of completely random data"}
-m <- leaflet(data) %>% 
-  addTiles() %>% 
-  addCircleMarkers(~x, ~y, radius = ~size,color = ~as.factor(category)) %>% 
-  addPopups(~x[2], ~y[2], "Random popup")
-m  # a map with the default OSM tile layer
-```
-
-
-```{r}
-data %>% 
-  ggplot(aes(x=x,y=y,col=category))+
-  geom_point()
-```
-
-# Conclusions
-
-[~200 words]
-
-Clear summary adequately describing the results and putting them in context. Discussion of further questions and ways to continue investigation.
 
 # References
 
-All sources are cited in a consistent manner
+American Community Survey 5-Year Data (2009-2021). (2022, December 9). Census Bureau. Retrieved December 16, 2022, from https://www.census.gov/data/developers/data-sets/acs-5year.html
+
+Datasets | Climate Data Online (CDO) | National Climatic Data Center (NCDC). (n.d.). National Centers for Environmental Information. Retrieved December 16, 2022, from https://www.ncdc.noaa.gov/cdo-web/datasets
+
+Harmful Algal Blooms (HABs) - NYS Dept. of Environmental Conservation. (n.d.). New York State Department of Environmental Conservation. Retrieved December 16, 2022, from https://www.dec.ny.gov/chemical/77118.html
+

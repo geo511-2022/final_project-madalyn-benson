@@ -140,7 +140,9 @@ Based on my expectations of this outline, relevant data will be
 projected in an effective way to show statistically relevant
 correlations.
 
+
 # Materials and Methods
+
 ### Create a choroplethr map of average populations at county level across NYS
 ```{r}
 library(choroplethr)
@@ -154,6 +156,7 @@ county_choropleth(df_pop_county,
                   legend = "Population",
                   state_zoom = "new york")
 ```
+
 ### Create a time-series graph of temperature trends over time for weather stations across NYS
 ```{r}
 library(tidyverse)
@@ -206,6 +209,7 @@ ggplot(ny_noaa_summary, aes(x = Year, y = mean_tmax, group = Year, color = Month
   labs(title = "Average Maximum Temperature for New York State Weather Stations",y = "Average Maximum Temperature (C)")
 
 ```
+
 ### Create an interactive map displaying county, year, and type of algal bloom when a waterbody is clicked on
 ```{r}
 library(ggplot2)

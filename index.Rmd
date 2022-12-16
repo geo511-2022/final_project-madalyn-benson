@@ -140,7 +140,7 @@ Based on my expectations of this outline, relevant data will be
 projected in an effective way to show statistically relevant
 correlations.
 
-## Materials and Methods
+# Materials and Methods
 ### Create a choroplethr map of average populations at county level across NYS
 ```{r}
 library(choroplethr)
@@ -234,8 +234,6 @@ m  # Print the map
 
 # Results and Conclusions
 
-[\~200 words]
-
 Algal blooms occur when exposed to the correct environmental conditions (i.e. excess nutrients, warm temperatures, ample sunlight, and low-flow water conditions). The maps and other graphics created above are carefully planned to
 convey the results of harmful algal blooms increasing over time in New York State. A map of New York State counties is provided as a reference map to refer back to in regards to populations. As shown on the map, the darker counties have larger populations. Downstate counties towards New York City and Long Island have some of the highest populations per county. This corresponds with the leaflet map because there are higher amounts of algal bloom occurrences in these higher populated counties. Higher populated areas tend to have more impaired water bodies and can be a great source nutrients for algae to grow.
 
@@ -244,4 +242,9 @@ The average maximum temperatures for New York State weather stations was not the
 
 # References
 
-All sources are cited in a consistent manner
+American Community Survey 5-Year Data (2009-2021). (2022, December 9). Census Bureau. Retrieved December 16, 2022, from https://www.census.gov/data/developers/data-sets/acs-5year.html
+
+Datasets | Climate Data Online (CDO) | National Climatic Data Center (NCDC). (n.d.). National Centers for Environmental Information. Retrieved December 16, 2022, from https://www.ncdc.noaa.gov/cdo-web/datasets
+
+Harmful Algal Blooms (HABs) - NYS Dept. of Environmental Conservation. (n.d.). New York State Department of Environmental Conservation. Retrieved December 16, 2022, from https://www.dec.ny.gov/chemical/77118.html
+
